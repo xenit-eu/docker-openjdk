@@ -16,4 +16,4 @@ matrix:
     before_install:
     - chmod +x ./gradlew
     script:
-    - if [[ $TRAVIS_BRANCH = "master" ]] ; then ./gradlew pushDockerImage ; fi
+    - if [[ $TRAVIS_BRANCH = "master" ]] ; then ./gradlew pushDockerImage ; else ./gradlew check --info ; fi

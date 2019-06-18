@@ -119,7 +119,7 @@ subprojects { Project project ->
             repository = "xeniteu/openjdk"
             tags = calcTags(project)
             pull = true
-            automaticTags = true
+            automaticTags = false
         }
     }
 
