@@ -23,12 +23,6 @@ This repository contains Xenit's distribution's Openjdk Java images for java <=7
 
 Channel [#docker](https://xenitengineering.slack.com/app_redirect?channel=docker) on Slack
 
-**Where to file [issues](https://xenitsupport.jira.com/issues/?jql=project%20%3D%20DOCKER%20AND%20component%20%3D%20Java):**
-
-In _JIRA_, Project `DOCKER`, select Component `Java`.
-
-**TO DO: change to github once moved there**
-
 **Maintained by:**
 
 Toon Geens <toon.geens@xenit.eu>, Roxana Angheluta <roxana.angheluta@xenit.eu>
@@ -135,9 +129,7 @@ You can override or disable the initialization scripts by overriding the `ENTRYP
 
 ### How to build
 
-Release builds are produced by [Jenkins](https://jenkins-2.xenit.eu/) driving Gradle from a `Jenkinsfile`.
-
-**TO DO: change to travis once moved to github**
+Release builds are produced by [Travis](https://travis-ci.org/xenit-eu/) driving Gradle from a `.travis.yml` file.
 
 To build a local version of the java image:
 

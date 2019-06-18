@@ -14,6 +14,7 @@ wrapper {
     gradleVersion = '4.10.2'
 }
 
+
 static String[] calcTags (Project project) {
     def java = project.java
     def os = project.os
@@ -84,6 +85,12 @@ static ContainerInfo getFirstContainer(String serviceName, ComposeUp composeTask
 
 subprojects { Project project ->
 
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+
     project.projectDir.mkdir()
 
     apply plugin: 'eu.xenit.docker'
@@ -153,6 +160,13 @@ subprojects { Project project ->
 
     clean.doLast {
         project.projectDir.delete()
+    }
+
+    docker {
+        registryCredentials {
+            username = System.getenv("DOCKER_USER")
+            password = System.getenv("DOCKER_PASSWORD")
+        }
     }
 
     dockerCompose {

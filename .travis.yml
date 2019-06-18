@@ -1,0 +1,19 @@
+language: java
+sudo: required
+dist: trusty
+services:
+- docker
+cache:
+  directories:
+  - "$HOME/.gradle"
+matrix:
+  include:
+  - os: linux
+    jdk: oraclejdk8
+    env:
+    - DOCKER_USER=xenitpublisher
+    - secure: "SbStsK3LWwFjDDKhWrbvxAfyk4hSIZctGpl8s0Z3bElSKND6v8bdwNWM27v4ihb5VJeRfslGyzWbP6eUZdbWqTTl/+Pv19oVsRxZQZRmkszpT/xVVAnW6N1+cjypwWWjIt5pX7cQyUfGo4qq2E7iZajApqRZyJLT0luLmHEDiPyhwjlc11xDaplBeBCedoVJ3aX5bgMB1pbXNLmPiAP1TLHEuM0kR1+re7OGqfbskU/eMObA5BV0TH6SburpSoLDNQldXzUbLwwG3ek+LxF4IkfJF05lUdEd/WWNTVHbK5SNh2f3YgptzCUTMr5t06eUxI2JJe3ixGTQZ1ln0eNtUxmm7Z8WUNMjdbMoGB1s58syYtON36a9X8r5WfB2dhA204GnOBwgLvKtLX7TaEgdnSBoBRGqAx7K33N65aHbgc7KgpGhWq0gJJaetEhuKquqyjVL6PZU7m0l/pTwUB5Vnk4BTU9QedvVClee7Jjk+dMV44rmlffQ35TKetvzY4lmflZyo95cdlTBz9mmqyNAdbeg955N0Ll83AdkLNOdvgeHIq7Te2dVuyI95Je1rGTp6+vw/12Vg4e4Esr4uJPJ1FSAFqyIooYqYlOcYuJH4JNuOgnc9mG7V8GaRnRXvO++yB5tTS0XA6HJYH2JIFDMFgvmWXP/JAhfJcEjT4jxy9c="
+    before_install:
+    - chmod +x ./gradlew
+    script:
+    - if [[ $TRAVIS_BRANCH = "master" ]] ; then ./gradlew pushDockerImage ; fi
