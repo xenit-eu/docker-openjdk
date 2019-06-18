@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  goss:
+    image: aelsabbahy/goss
+    command: goss --version
+    volumes:
+      - goss:/goss
+
+  java:
+    image: ${DOCKER_IMAGE}
+    command: /goss/goss --gossfile /goss.yaml validate --color --format documentation
+    depends_on:
+      - goss
+    volumes:
+      - goss:/goss
+      - ./goss.yaml:/goss.yaml:z
+    environment:
+      - GOSS_JAVA_VERSION      
+      - GOSS_OS_VENDOR
+      - GOSS_OS_VERSION
+      - JAVA_OPTS_GOSS
+
+volumes:
+  goss:

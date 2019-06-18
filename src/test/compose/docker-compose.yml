@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  java:
+    image: ${DOCKER_IMAGE}
+    environment:
+      - JAVA_OPTS_XMX=-Xmx256m
+      - JAVA_OPTS_XMS=-Xms128m

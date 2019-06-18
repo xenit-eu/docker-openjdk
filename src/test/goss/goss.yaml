@@ -1,0 +1,23 @@
+file:
+  /etc/os-release:
+    title: Check OS release
+    exists: true
+    contains:
+    - /^ID="?{{ .Env.GOSS_OS_VENDOR }}"?/
+    - /^VERSION_ID="?{{ .Env.GOSS_OS_VERSION }}"?/
+command:
+  java -version:
+    exit-status: 0
+    stderr:    
+        - /{{ .Env.GOSS_JAVA_VERSION }}/
+    timeout: 2000
+  jrunscript -e "if (javax.crypto.Cipher.getMaxAllowedKeyLength('AES') < 256) exit(1);":
+    title: Ensure that AES-256 is available
+    exit-status: 0
+    timeout: 10000
+  echo $JAVA_OPTS:
+    exit-status: 0
+    title: Verify JAVA_OPTS_* are collected into JAVA_OPTS
+    stdout:
+    - "-Dtest.java.opts=goss-test"
+

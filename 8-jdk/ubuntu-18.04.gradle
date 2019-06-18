@@ -1,0 +1,12 @@
+ext {
+    java = [
+            vendor: 'adoptopenjdk',
+            flavor: 'jdk',
+            version: rootProject.getLatestAdoptOpenjdkJavaRelease(8,'ubuntu','18.04')
+    ]
+    os = [
+            vendor: 'ubuntu',
+            version: '18.04',
+            flavor: 'bionic'
+    ]
+}

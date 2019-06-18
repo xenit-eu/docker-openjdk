@@ -1,0 +1,24 @@
+ARG BASE_IMAGE=ubuntu:latest
+FROM $BASE_IMAGE
+
+ARG JAVA_FLAVOR
+ARG JAVA_VERSION_MAJOR
+ARG JAVA_VERSION_UPDATE
+ARG JAVA_VERSION=${JAVA_VERSION_MAJOR}u${JAVA_VERSION_UPDATE}
+
+ENV JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION_MAJOR}-openjdk-amd64
+
+COPY ./docker-entrypoint.sh /
+COPY ./docker-entrypoint.d/* /docker-entrypoint.d/
+
+RUN env && \
+
+    apt-get update && \
+    if apt-cache show openjdk-${JAVA_VERSION_MAJOR}-${JAVA_FLAVOR}=${JAVA_VERSION}* ; then apt-get install -y openjdk-${JAVA_VERSION_MAJOR}-${JAVA_FLAVOR}=${JAVA_VERSION}* ; fi && \
+    apt-get --purge -y autoremove && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV PATH ${PATH}:${JAVA_HOME}/bin
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["java", "$JAVA_OPTS", "-version"]

@@ -1,0 +1,11 @@
+ext {
+    java = [
+            vendor: 'oracle',
+            flavor: 'jdk',
+            version: rootProject.getLatestOpenjdkJavaRelease(7,'centos','7')
+    ]
+    os = [
+            vendor: 'centos',
+            version: '7',
+    ]
+}

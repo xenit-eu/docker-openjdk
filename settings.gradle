@@ -1,0 +1,21 @@
+rootProject.name = 'docker-java'
+
+rootProject.projectDir
+    .listFiles({ File file ->
+        ["jdk", "jre"].any { file.name.contains(it) }
+    } as FileFilter)
+
+    .collectMany ({ File dist ->
+        dist.listFiles({ File file ->
+            file.name.endsWith('.gradle')
+        } as FileFilter).toList()
+    })
+
+    .each { File projectFile ->
+        def distName = projectFile.parentFile.name
+        def tagName = projectFile.name.take(projectFile.name.lastIndexOf('.'))
+        def projectName = "${distName}-${tagName}"
+
+        include projectName
+        project(":${projectName}").projectDir = file("${distName}/${tagName}")
+    }

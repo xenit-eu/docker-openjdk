@@ -1,0 +1,296 @@
+import com.avast.gradle.dockercompose.ContainerInfo
+import com.avast.gradle.dockercompose.tasks.ComposeDown
+import com.avast.gradle.dockercompose.tasks.ComposeUp
+import com.bmuschko.gradle.docker.tasks.container.DockerWaitContainer
+
+import java.util.concurrent.Callable
+
+plugins {
+    id "eu.xenit.docker" version "4.0.3" apply false
+}
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = '4.10.2'
+}
+
+static String[] calcTags (Project project) {
+    def java = project.java
+    def os = project.os
+    def extraTags = project.hasProperty('extraTags') ? project.extraTags : []
+
+    def javaTags = []
+    javaTags << "${java.flavor}-${java.version.major}u${java.version.update}"
+    javaTags << "${java.flavor}-${java.version.major}"
+
+    def osTags = []
+    osTags << "${os.vendor}-${os.version}"
+    if (os.name) osTags << os.name
+    if (isDefaultOsVersion(os)) osTags << os.vendor
+
+    // create every java- & os-tag combination
+    def tags = [javaTags, osTags]
+            .combinations()
+            .collect { it.join('-') }
+
+    // add another tag that omits distro-information if
+    // it's our default OS release (currently Ubuntu 16.04)
+    if (isDefaultOsRelease(os)) {
+        tags += javaTags
+    }
+
+    return extraTags + tags
+}
+
+static Map getLatestOpenjdkJavaRelease(major, vendor, osversion) {
+    [
+            [vendor: 'centos', osversion: '6', major: 6, update: 41],
+            [vendor: 'centos', osversion: '7', major: 7, update: 221],
+            [vendor: 'ubuntu', osversion: '14.04', major: 6, update: 41],
+            [vendor: 'ubuntu', osversion: '14.04', major: 7, update: 211],
+    ].find { it.vendor.equals(vendor) && it.major == major && it.osversion.equals(osversion) }
+}
+
+static Map getLatestAdoptOpenjdkJavaRelease(major, vendor, osversion) {
+    [
+            [vendor: 'centos', osversion: '7', major: 8, update: 212, extra: 'b03', esum: 'dd28d6d2cde2b931caf94ac2422a2ad082ea62f0beee3bf7057317c53093de93'],
+            [vendor: 'centos', osversion: '7', major: 11, update: 3, extra: '7', esum: '23cded2b43261016f0f246c85c8948d4a9b7f2d44988f75dad69723a7a526094'],
+            [vendor: 'ubuntu', osversion: '14.04', major: 8, update: 212, extra: 'b03', esum: 'dd28d6d2cde2b931caf94ac2422a2ad082ea62f0beee3bf7057317c53093de93'],
+            [vendor: 'ubuntu', osversion: '16.04', major: 8, update: 212, extra: 'b03', esum: 'dd28d6d2cde2b931caf94ac2422a2ad082ea62f0beee3bf7057317c53093de93'],
+            [vendor: 'ubuntu', osversion: '18.04', major: 8, update: 212, extra: 'b03', esum: 'dd28d6d2cde2b931caf94ac2422a2ad082ea62f0beee3bf7057317c53093de93'],
+            [vendor: 'ubuntu', osversion: '18.04', major: 11, update: 3, extra: '7', esum: '23cded2b43261016f0f246c85c8948d4a9b7f2d44988f75dad69723a7a526094']
+    ].find { it.vendor.equals(vendor) && it.major == major && it.osversion.equals(osversion) }
+}
+
+static Map getDefaultOsVersion(vendor) {
+    [
+            [ vendor: 'ubuntu', version: '16.04'],
+            [ vendor: 'centos', version: '7']
+    ].find { it.vendor == vendor }
+}
+
+static boolean isDefaultOsVersion(os) {
+    def defaultRelease = getDefaultOsVersion(os.vendor)
+    return defaultRelease.version == os.version
+}
+
+static boolean isDefaultOsRelease(os) {
+    return os.vendor == 'ubuntu' && isDefaultOsVersion(os)
+}
+
+static ContainerInfo getFirstContainer(String serviceName, ComposeUp composeTask) {
+    composeTask.servicesInfos.get(serviceName).firstContainer
+}
+
+subprojects { Project project ->
+
+    project.projectDir.mkdir()
+
+    apply plugin: 'eu.xenit.docker'
+    apply plugin: 'base'
+
+    apply from: "${project.projectDir}.gradle"
+
+    task copyDocker(type: Copy) {
+        if (new File("$project.parent.projectDir/src/main/docker/Dockerfile.${project.os.vendor}.${project.java.vendor}").exists()) {
+            from("$project.parent.projectDir/src/main/docker") {
+                include "Dockerfile.${project.os.vendor}.${project.java.vendor}"
+                rename "Dockerfile.${project.os.vendor}.${project.java.vendor}", 'Dockerfile'
+
+                include 'docker-entrypoint.sh'
+                include 'docker-entrypoint.d/'
+            }
+            into "${project.buildDir}/docker"
+        }
+    }
+
+    buildDockerImage.dependsOn(copyDocker)
+
+    dockerFile {
+        dockerFile = file("${project.buildDir}/docker/Dockerfile")
+        dockerBuild {
+            repository = "xeniteu/openjdk"
+            tags = calcTags(project)
+            pull = true
+            automaticTags = true
+        }
+    }
+
+    buildDockerImage {
+        buildArgs = [
+                'BASE_IMAGE': "${project.os.vendor}:${project.os.version}",
+
+                'JAVA_FLAVOR': project.java.flavor,
+                'JAVA_VERSION_MAJOR': "${project.java.version.major}",
+                'JAVA_VERSION_UPDATE': "${project.java.version.update}"
+        ]
+
+        if(project.java.version.get('extra')) {
+            if (java.version.major < 11) {
+                buildArgs.put('JAVA_VERSION',"${project.java.version.major}u${project.java.version.update}-${project.java.version.extra}");
+                buildArgs.put('JAVA_VERSION_COMPACT',"${project.java.version.major}u${project.java.version.update}${project.java.version.extra}");
+            } else {
+                buildArgs.put('JAVA_VERSION',"-${project.java.version.major}.0.${project.java.version.update}+${project.java.version.extra}");
+                buildArgs.put('JAVA_VERSION_COMPACT',"${project.java.version.major}.0.${project.java.version.update}_${project.java.version.extra}");
+            }
+        }
+        if(project.java.version.get('esum'))
+            buildArgs.put('JAVA_VERSION_ESUM',"${project.java.version.esum}")
+
+        if (project.hasProperty('extraBuildArgs'))
+            buildArgs << project.extraBuildArgs
+
+        doFirst {
+            println buildArgs
+        }
+    }
+
+    task printTags {
+        doFirst {
+            println calcTags(project)
+        }
+    }
+
+    clean.doLast {
+        project.projectDir.delete()
+    }
+
+    dockerCompose {
+        captureContainersOutput = true
+
+        goss {
+            useComposeFiles = [
+                    "${project.parent.projectDir}/src/test/goss/docker-compose.yml"
+            ]
+
+            if (project.hasProperty('extraBuildArgs') && project.extraBuildArgs.get('JAVA_VERSION_REPORTED'))
+                environment.put 'GOSS_JAVA_VERSION', project.extraBuildArgs.get('JAVA_VERSION_REPORTED')
+            else if (project.java.version.major > 8)
+                environment.put 'GOSS_JAVA_VERSION', "${project.java.version.major}.0.${project.java.version.update}"
+            else
+                environment.put 'GOSS_JAVA_VERSION', "1.${project.java.version.major}.0_${project.java.version.update}"
+
+            environment.put 'GOSS_OS_VENDOR', "${project.os.vendor}"
+            environment.put 'GOSS_OS_VERSION', "${project.os.version}"
+
+            environment.put 'JAVA_OPTS_GOSS', "-Dtest.java.opts=goss-test"
+        }
+
+        basic {
+            useComposeFiles = [
+                    "${project.parent.projectDir}/src/test/compose/docker-compose.yml"
+            ]
+        }
+    }
+
+    // Create a task that runts the compose-configuration and verifies
+    // that the java container exits with status code 0
+    def createComposeTestTask = { String config ->
+        String taskname = "test${config.capitalize()}ComposeUp"
+
+        def waitTask = project.tasks.create(taskname, DockerWaitContainer.class) { DockerWaitContainer task1 ->
+            group = 'verification'
+
+            ComposeUp composeUp = project.tasks["${config}ComposeUp"]
+            task1.dependsOn(composeUp)
+            task1.targetContainerId(new Callable<String>() {
+                @Override
+                String call() throws Exception {
+                    ContainerInfo javaContainer = getFirstContainer('java', composeUp)
+
+                    return javaContainer.getContainerId()
+                }
+            })
+            onNext { r ->
+                ContainerInfo container = getFirstContainer('java', composeUp)
+                println "Container ${container} exited (exit code '${r.statusCode}'"
+                if (r.statusCode) {
+
+                    throw new GradleException("Docker image test failed: ${container.inspection.Config.Image}")
+                }
+            }
+        }
+        ComposeDown composeDown = project.tasks["${config}ComposeDown"]
+        project.tasks.composeBasedImageTests.finalizedBy(composeDown)
+        project.tasks.composeDownAll.dependsOn(composeDown)
+        return waitTask
+    }
+
+    task composeDownAll {
+    }
+
+    task composeBasedImageTests {
+        group = 'verification'
+
+        ['basic', 'goss'].each {
+            Task test = createComposeTestTask(it)
+            dependsOn test
+        }
+    }
+
+    check {
+        dependsOn(composeBasedImageTests)
+    }
+
+    // TODO this can be removed once DEVEM-343 is resolved
+    buildDockerImage {
+        doLast {
+            project.tasks.withType(ComposeUp.class) { ComposeUp composeUp ->
+                composeUp.settings.environment.put("DOCKER_IMAGE", buildDockerImage.getImageId())
+            }
+        }
+    }
+
+    // All ComposeUp tasks should depend on `buildDockerImage` in our case ?
+    project.tasks.withType(ComposeUp.class) { ComposeUp composeTask ->
+        composeTask.dependsOn(project.tasks.buildDockerImage)
+    }
+
+}
+
+task printSupportedTags {
+    doFirst {
+
+        def currentTags = (subprojects).collect{ calcTags(it) }
+
+        println '## Supported tags'
+        println ''
+
+        currentTags.each { tags ->
+            println "* ${tags.collect{ "`$it`" }.join(', ')}"
+        }
+    }
+
+}
+
+task verifyImageTags {
+    doLast {
+        // allTags is a map from tag -> [ projects ]
+        def allTags = subprojects.collectEntries{
+            [(it): calcTags(it)]
+        }
+                .collectMany { project, tags ->
+                    tags.collect { new MapEntry(it, project) }
+                }
+                .groupBy { it.key }
+                .collectEntries { [(it.key), it.value.collect{entry -> entry.value}] }
+
+        // Check there are no duplicate tag declarations for the same java repo
+        allTags
+                .findAll { it.value.size() > 1 }
+                .each {
+                    throw new GradleException("Image tag '$it.key' is defined in multiple projects: $it.value")
+                }
+
+        // Check that a few common/expected tags are actually published
+        def expectedTags = [ 'jdk-8' ]
+        expectedTags.each {
+            if (!allTags.containsKey(it))
+                throw new GradleException("Expected tag '$it' is not defined in any project")
+        }
+    }
+}
+
+task check {
+    dependsOn(verifyImageTags)
+}

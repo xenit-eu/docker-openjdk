@@ -1,0 +1,16 @@
+ext {
+    java = [
+            vendor: 'oracle',
+            flavor: 'jdk',
+            version: rootProject.getLatestOpenjdkJavaRelease(6,'ubuntu','14.04')
+    ]
+    os = [
+            vendor: 'ubuntu',
+            version: '14.04',
+            flavor: 'trusty'
+    ]
+    extraBuildArgs = [
+            JAVA_VERSION: '6b41'
+    ]
+    extraTags = [ "alfresco-4.0-ubuntu", "alfresco-4.1-ubuntu" ]
+}

@@ -1,0 +1,13 @@
+ext {
+    java = [
+            vendor: 'adoptopenjdk',
+            flavor: 'jdk',
+            version: rootProject.getLatestAdoptOpenjdkJavaRelease(8,'ubuntu','14.04')
+    ]
+    os = [
+            vendor: 'ubuntu',
+            version: '14.04',
+            flavor: 'trusty'
+    ]
+    extraTags = [ "alfresco-5.0-ubuntu" ]
+}

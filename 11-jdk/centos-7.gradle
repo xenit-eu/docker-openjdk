@@ -1,0 +1,12 @@
+ext {
+    java = [
+            vendor: 'adoptopenjdk',
+            flavor: 'jdk',
+            version: rootProject.getLatestAdoptOpenjdkJavaRelease(11,'centos','7')
+    ]
+    os = [
+            vendor: 'centos',
+            version: '7',
+    ]
+    extraTags = [ "alfresco-6.0-centos", "alfresco-6.1-centos" ]
+}
