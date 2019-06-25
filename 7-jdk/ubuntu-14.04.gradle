@@ -7,7 +7,7 @@ ext {
     os = [
             vendor: 'ubuntu',
             version: '14.04',
-            flavor: 'trusty'
+            name: 'trusty'
     ]
     // version reported by java -version is different than the version installed
     extraBuildArgs = [

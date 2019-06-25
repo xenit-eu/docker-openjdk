@@ -7,7 +7,7 @@ ext {
     os = [
             vendor: 'ubuntu',
             version: '14.04',
-            flavor: 'trusty'
+            name: 'trusty'
     ]
     extraBuildArgs = [
             JAVA_VERSION: '6b41'
