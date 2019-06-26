@@ -6,6 +6,6 @@ ext {
     ]
     os = [
             vendor: 'centos',
-            version: '6',
+            version: '6'
     ]
 }

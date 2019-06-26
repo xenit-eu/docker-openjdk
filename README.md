@@ -6,16 +6,15 @@ This repository contains Xenit's distribution's Openjdk Java images for java <=7
 ## Supported tags
 
 * `alfresco-6.0-centos`, `alfresco-6.1-centos`, `jdk-11u3-centos-7`, `jdk-11-centos-7`, `jdk-11u3-centos`, `jdk-11-centos`
-* `alfresco-6.0-ubuntu`, `alfresco-6.1-ubuntu`, `jdk-11u3-ubuntu-18.04`, `jdk-11-ubuntu-18.04`
+* `alfresco-6.0-ubuntu`, `alfresco-6.1-ubuntu`, `jdk-11u3-ubuntu-18.04`, `jdk-11-ubuntu-18.04`, `jdk-11u3-bionic`, `jdk-11-bionic`
 * `jdk-6u41-centos-6`, `jdk-6-centos-6`
-* `alfresco-4.0-ubuntu`, `alfresco-4.1-ubuntu`, `jdk-6u41-ubuntu-14.04`, `jdk-6-ubuntu-14.04`
+* `alfresco-4.0-ubuntu`, `alfresco-4.1-ubuntu`, `jdk-6u41-ubuntu-14.04`, `jdk-6-ubuntu-14.04`, `jdk-6u41-trusty`, `jdk-6-trusty`
 * `jdk-7u221-centos-7`, `jdk-7-centos-7`, `jdk-7u221-centos`, `jdk-7-centos`
-* `alfresco-4.2-ubuntu`, `jdk-7u211-ubuntu-14.04`, `jdk-7-ubuntu-14.04`
+* `alfresco-4.2-ubuntu`, `jdk-7u211-ubuntu-14.04`, `jdk-7-ubuntu-14.04`, `jdk-7u211-trusty`, `jdk-7-trusty`
 * `alfresco-5.1-centos`, `alfresco-5.2-centos`, `jdk-8u212-centos-7`, `jdk-8-centos-7`, `jdk-8u212-centos`, `jdk-8-centos`
-* `alfresco-5.0-ubuntu`, `jdk-8u212-ubuntu-14.04`, `jdk-8-ubuntu-14.04`
-* `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`, `jdk-8u212-ubuntu-16.04`, `jdk-8-ubuntu-16.04`, `jdk-8u212-ubuntu`, `jdk-8-ubuntu`, `jdk-8u212`, `jdk-8`
-* `jdk-8u212-ubuntu-18.04`, `jdk-8-ubuntu-18.04`
-
+* `alfresco-5.0-ubuntu`, `jdk-8u212-ubuntu-14.04`, `jdk-8-ubuntu-14.04`, `jdk-8u212-trusty`, `jdk-8-trusty`
+* `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`, `jdk-8u212-ubuntu-16.04`, `jdk-8-ubuntu-16.04`, `jdk-8u212-xenial`, `jdk-8-xenial`, `jdk-8u212-ubuntu`, `jdk-8-ubuntu`, `jdk-8u212`, `jdk-8`
+* `jdk-8u212-ubuntu-18.04`, `jdk-8-ubuntu-18.04`, `jdk-8u212-bionic`, `jdk-8-bionic`
 
 ## Quick reference
 

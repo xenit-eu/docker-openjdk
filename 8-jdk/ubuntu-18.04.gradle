@@ -7,6 +7,6 @@ ext {
     os = [
             vendor: 'ubuntu',
             version: '18.04',
-            flavor: 'bionic'
+            name: 'bionic'
     ]
 }

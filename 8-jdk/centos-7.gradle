@@ -6,7 +6,7 @@ ext {
     ]
     os = [
             vendor: 'centos',
-            version: '7',
+            version: '7'
     ]
     extraTags = [ "alfresco-5.1-centos", "alfresco-5.2-centos" ]
 }
