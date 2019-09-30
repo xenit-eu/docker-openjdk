@@ -116,7 +116,7 @@ subprojects { Project project ->
     dockerFile {
         dockerFile = file("${project.buildDir}/docker/Dockerfile")
         dockerBuild {
-            repository = "xeniteu/openjdk"
+            repository = "xenit/openjdk"
             tags = calcTags(project)
             pull = true
             automaticTags = false

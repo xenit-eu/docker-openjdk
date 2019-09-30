@@ -37,7 +37,7 @@ Toon Geens <toon.geens@xenit.eu>, Roxana Angheluta <roxana.angheluta@xenit.eu>
 
 ## Environment Variables
 
-The `xeniteu/openjdk` image supports the following environment variables:
+The `xenit/openjdk` image supports the following environment variables:
 
 ### JAVA_OPTS_xxx
 
