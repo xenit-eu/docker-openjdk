@@ -16,6 +16,23 @@ This repository contains Xenit's distribution's Openjdk Java images for java <=7
 * `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`, `jdk-8u212-ubuntu-16.04`, `jdk-8-ubuntu-16.04`, `jdk-8u212-xenial`, `jdk-8-xenial`, `jdk-8u212-ubuntu`, `jdk-8-ubuntu`, `jdk-8u212`, `jdk-8`
 * `jdk-8u212-ubuntu-18.04`, `jdk-8-ubuntu-18.04`, `jdk-8u212-bionic`, `jdk-8-bionic`
 
+## Environment variables
+
+There are several environment variables available to tweak the behaviour. While none of the variables are required, they may significantly aid you in using these images.
+The variables are read by an init script which further appends to to JAVA_OPTS.
+
+Environment variables:
+
+| Variable                    |  Default                        | Java variable |
+| --------------------------- | ------------------------------- | --------------------------- |
+| JAVA_XMS                    |                                   | -Xmx                                                         |                                                              |  |
+| JAVA_XMX                    |                                   | -Xms                                                         |                                                              |  |
+| DEBUG                       |                                   | -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n |     false                                                         |  |
+| JMX_ENABLED                 |                                   | -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.rmi.port=5000 -Dcom.sun.management.jmxremote.port=5000 -Djava.rmi.server.hostname=$JMX_RMI_HOST |     false                                                         |  |
+| JMX_RMI_HOST                |                                   |                                                              |  0.0.0.0                                                            |  |
+| JAVA_OPTS_\<variable\>=\<value\>       |                      | \<value\>                                                   |                                                              |  |
+
+
 ## Quick reference
 
 **Where to get help:**
@@ -136,4 +153,12 @@ To build a local version of the java image:
 ./gradlew buildDockerImage
 ```
 
-Note that locally build image-tags will be prefixed with `local-`, so they can be clearly distinguished from _Release_-builds.
+## FAQ
+
+### How do I access the Tomcat debugport ?
+
+Set the environment variable DEBUG=true. The debug port is 8000.
+
+### How do I enable JMX?
+
+Set the environment variable JMX_ENABLED=true. Jmx port is 5000.
