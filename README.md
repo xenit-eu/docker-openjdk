@@ -12,9 +12,7 @@ This repository contains Xenit's distribution's Openjdk Java images for java <=7
 * `jdk-7u221-centos-7`, `jdk-7-centos-7`, `jdk-7u221-centos`, `jdk-7-centos`
 * `alfresco-4.2-ubuntu`, `jdk-7u211-ubuntu-14.04`, `jdk-7-ubuntu-14.04`, `jdk-7u211-trusty`, `jdk-7-trusty`
 * `alfresco-5.1-centos`, `alfresco-5.2-centos`, `jdk-8u212-centos-7`, `jdk-8-centos-7`, `jdk-8u212-centos`, `jdk-8-centos`
-* `alfresco-5.0-ubuntu`, `jdk-8u212-ubuntu-14.04`, `jdk-8-ubuntu-14.04`, `jdk-8u212-trusty`, `jdk-8-trusty`
-* `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`, `jdk-8u212-ubuntu-16.04`, `jdk-8-ubuntu-16.04`, `jdk-8u212-xenial`, `jdk-8-xenial`, `jdk-8u212-ubuntu`, `jdk-8-ubuntu`, `jdk-8u212`, `jdk-8`
-* `jdk-8u212-ubuntu-18.04`, `jdk-8-ubuntu-18.04`, `jdk-8u212-bionic`, `jdk-8-bionic`
+* `alfresco-5.0-ubuntu`, `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`, `jdk-8u212-ubuntu-18.04`, `jdk-8-ubuntu-18.04`, `jdk-8u212-bionic`, `jdk-8-bionic`, `jdk-8u212-ubuntu`, `jdk-8-ubuntu`, `jdk-8u212`, `jdk-8`
 
 ## Environment variables
 
