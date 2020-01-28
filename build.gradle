@@ -44,28 +44,30 @@ static String[] calcTags (Project project) {
 }
 
 static Map getLatestOpenjdkJavaRelease(major, vendor, osversion) {
-    [
+    def result = [
             [vendor: 'centos', osversion: '6', major: 6, update: 41],
             [vendor: 'centos', osversion: '7', major: 7, update: 221],
             [vendor: 'ubuntu', osversion: '14.04', major: 6, update: 41],
             [vendor: 'ubuntu', osversion: '14.04', major: 7, update: 211],
     ].find { it.vendor.equals(vendor) && it.major == major && it.osversion.equals(osversion) }
+    assert result != null : "No JDK version ${major} found for '${vendor} ${osversion}'"
+    return result
 }
 
 static Map getLatestAdoptOpenjdkJavaRelease(major, vendor, osversion) {
-    [
+    def result = [
             [vendor: 'centos', osversion: '7', major: 8, update: 212, extra: 'b03', esum: 'dd28d6d2cde2b931caf94ac2422a2ad082ea62f0beee3bf7057317c53093de93'],
             [vendor: 'centos', osversion: '7', major: 11, update: 3, extra: '7', esum: '23cded2b43261016f0f246c85c8948d4a9b7f2d44988f75dad69723a7a526094'],
-            [vendor: 'ubuntu', osversion: '14.04', major: 8, update: 212, extra: 'b03', esum: 'dd28d6d2cde2b931caf94ac2422a2ad082ea62f0beee3bf7057317c53093de93'],
-            [vendor: 'ubuntu', osversion: '16.04', major: 8, update: 212, extra: 'b03', esum: 'dd28d6d2cde2b931caf94ac2422a2ad082ea62f0beee3bf7057317c53093de93'],
             [vendor: 'ubuntu', osversion: '18.04', major: 8, update: 212, extra: 'b03', esum: 'dd28d6d2cde2b931caf94ac2422a2ad082ea62f0beee3bf7057317c53093de93'],
             [vendor: 'ubuntu', osversion: '18.04', major: 11, update: 3, extra: '7', esum: '23cded2b43261016f0f246c85c8948d4a9b7f2d44988f75dad69723a7a526094']
     ].find { it.vendor.equals(vendor) && it.major == major && it.osversion.equals(osversion) }
+    assert result != null : "No AdoptOpenJDK version ${major} found for '${vendor} ${osversion}'"
+    return result
 }
 
 static Map getDefaultOsVersion(vendor) {
     [
-            [ vendor: 'ubuntu', version: '16.04'],
+            [ vendor: 'ubuntu', version: '18.04'],
             [ vendor: 'centos', version: '7']
     ].find { it.vendor == vendor }
 }
