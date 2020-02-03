@@ -1,12 +1,12 @@
 # Java Docker Images
 
-Docker Images for OpenJDK built and maintained by XeniT
+OpenJDK Docker Images built and maintained by XeniT
 
-* Using Adoptopenjdk (https://adoptopenjdk.net/) for Java 8 and later.
+* Using [AdoptOpenJDK](https://adoptopenjdk.net/) for Java 8 and later.
 * Using OpenJDK from the Ubuntu or CentOS distributions Java 6 and 7 (legacy).
 
 
-## Supported tags
+## Supported Tags
 
 * `alfresco-6.0-centos`, `alfresco-6.1-centos`, `jdk-11u3-centos-7`, `jdk-11-centos-7`, `jdk-11u3-centos`, `jdk-11-centos`
 * `alfresco-6.0-ubuntu`, `alfresco-6.1-ubuntu`, `jdk-11u3-ubuntu-18.04`, `jdk-11-ubuntu-18.04`, `jdk-11u3-bionic`, `jdk-11-bionic`
