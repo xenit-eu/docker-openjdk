@@ -1,6 +1,9 @@
 # Java Docker Images
 
-This repository contains Xenit's distribution's Openjdk Java images for java <=7 and the Adoptopenjdk images (https://adoptopenjdk.net/) for java >=8.
+Docker Images for OpenJDK built and maintained by XeniT
+
+* Using Adoptopenjdk (https://adoptopenjdk.net/) for Java 8 and later.
+* Using OpenJDK from the Ubuntu or CentOS distributions Java 6 and 7 (legacy).
 
 
 ## Supported tags
