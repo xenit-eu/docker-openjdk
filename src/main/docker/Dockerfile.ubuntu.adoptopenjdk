@@ -15,7 +15,6 @@ COPY ./docker-entrypoint.sh /
 COPY ./docker-entrypoint.d/* /docker-entrypoint.d/
 
 RUN env && \
-
     apt-get update && apt-get install -y curl && \
     curl -LfsSo /tmp/openjdk.tar.gz ${BINARY_URL} && \
     echo "${JAVA_VERSION_ESUM} */tmp/openjdk.tar.gz" | sha256sum -c - && \

@@ -21,8 +21,6 @@ RUN env && \
     cd /opt/java/openjdk && \
     tar -xf /tmp/openjdk.tar.gz --strip-components=1 && \
     rm -rf /tmp/openjdk.tar.gz && \
-
-    # Cleaning up temp artifacts
     yum clean all && \
     rm -rf /var/cache/yum
 
