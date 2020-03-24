@@ -11,10 +11,6 @@ COPY ./docker-entrypoint.sh /
 COPY ./docker-entrypoint.d/* /docker-entrypoint.d/
 
 RUN env && \
-
-    ## Hacky hacky fixing up /etc/os-release goss-test:
-    if [ ! -e /etc/os-release ]; then echo -e ID=centos\\nVERSION_ID=6 > /etc/os-release; fi && \
-
     yum install -y java-1.${JAVA_VERSION_MAJOR}.0-openjdk-devel-1.${JAVA_VERSION_MAJOR}.0.${JAVA_VERSION_UPDATE}* && \
 
     # Cleaning up temp artifacts
