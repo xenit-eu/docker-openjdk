@@ -40,9 +40,7 @@ static List<String> calcTags (Project project) {
 
 static Map getLatestOpenjdkJavaRelease(major, vendor, osversion) {
     def result = [
-            [vendor: 'centos', osversion: '6', major: 6, update: 41],
             [vendor: 'centos', osversion: '7', major: 7, update: 221],
-            [vendor: 'ubuntu', osversion: '14.04', major: 6, update: 41],
             [vendor: 'ubuntu', osversion: '14.04', major: 7, update: 211],
     ].find { it.vendor.equals(vendor) && it.major == major && it.osversion.equals(osversion) }
     assert result != null : "No JDK version ${major} found for '${vendor} ${osversion}'"

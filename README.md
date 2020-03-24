@@ -10,12 +10,11 @@ OpenJDK Docker Images built and maintained by XeniT
 
 * `alfresco-6.0-centos`, `alfresco-6.1-centos`, `jdk-11u3-centos-7`, `jdk-11-centos-7`, `jdk-11u3-centos`, `jdk-11-centos`
 * `alfresco-6.0-ubuntu`, `alfresco-6.1-ubuntu`, `jdk-11u3-ubuntu-18.04`, `jdk-11-ubuntu-18.04`, `jdk-11u3-bionic`, `jdk-11-bionic`
-* `jdk-6u41-centos-6`, `jdk-6-centos-6`
-* `alfresco-4.0-ubuntu`, `alfresco-4.1-ubuntu`, `jdk-6u41-ubuntu-14.04`, `jdk-6-ubuntu-14.04`, `jdk-6u41-trusty`, `jdk-6-trusty`
 * `jdk-7u221-centos-7`, `jdk-7-centos-7`, `jdk-7u221-centos`, `jdk-7-centos`
-* `alfresco-4.2-ubuntu`, `jdk-7u211-ubuntu-14.04`, `jdk-7-ubuntu-14.04`, `jdk-7u211-trusty`, `jdk-7-trusty`
 * `alfresco-5.1-centos`, `alfresco-5.2-centos`, `jdk-8u212-centos-7`, `jdk-8-centos-7`, `jdk-8u212-centos`, `jdk-8-centos`
 * `alfresco-5.0-ubuntu`, `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`, `jdk-8u212-ubuntu-18.04`, `jdk-8-ubuntu-18.04`, `jdk-8u212-bionic`, `jdk-8-bionic`, `jdk-8u212-ubuntu`, `jdk-8-ubuntu`, `jdk-8u212`, `jdk-8`
+* `alfresco-4.2-ubuntu`, `jdk-7u211-ubuntu-14.04`, `jdk-7-ubuntu-14.04`, `jdk-7u211-trusty`, `jdk-7-trusty`
+
 
 ## Environment variables
 
@@ -86,9 +85,6 @@ Please file an issue if you need a different combination of parameters.
 In general, the latest update of the LTS-releases of the different distributions are maintained, both for `-ubuntu` and `-centos`,
 based on the latest LTS release, of that distribution.
 
-* jdk-6:
-    - `jdk-6-ubuntu`
-    - `jdk-6-centos`
 * jdk-7
     - `jdk-7-ubuntu`
     - `jdk-7-centos`
@@ -113,16 +109,16 @@ Java update is always the latest one available.
  
 At the moment, following versions are built:
 
-| Alfresco      | Oracle Openjdk  | Adopt Openjdk      | Ubuntu                             | CentOS                           |
-| ------------- | --------------  | ------------------ | ---------------------------------- | -------------------------------- |
-| Alfresco 6.1  |                 |  JDK 11u3          | 18.04 - `jdk-11u3-ubuntu-18.04`    | 7 - `jdk-11u3-centos-7`          |
-| Alfresco 6.0  |                 |  JDK 11u3          | 18.04 - `jdk-11u3-ubuntu-18.04`    | 7 - `jdk-11u3-centos-7`          | 
-| Alfresco 5.2  |                 |  JDK 8u212         | 16.04 - `jdk-8u212-ubuntu-16.04`   | 7 - `jdk-8u212-centos-7`         |
-| Alfresco 5.1  |                 |  JDK 8u212         | 16.04 - `jdk-8u212-ubuntu-16.04`   | 7 - `jdk-8u212-centos-7`         |
-| Alfresco 5.0  |                 |  JDK 8u212         | 14.04 - `jdk-8u212-ubuntu-14.04`   |                                  |
-| Alfresco 4.2  | JDK 7u211       |                    | 14.04 - `jdk-7u211-ubuntu-14.04`   |                                  |
-| Alfresco 4.1  | JDK 6b41        |                    | 14.04 - `jdk-6u41-ubuntu-14.04`    |                                  |
-| Alfresco 4.0  | JDK 6b41        |                    | 14.04 - `jdk-6u41-ubuntu-14.04`    |                                  |
+| Alfresco      | OpenJDk            | Ubuntu                             | CentOS                       |
+| ------------- | ------------------ | ---------------------------------- | ---------------------------- |
+| Alfresco 6.2  | JDK 11u3           | 18.04 - `jdk-11u3-ubuntu-18.04`    | 7 - `jdk-11u3-centos-7`      |
+| Alfresco 6.1  | JDK 11u3           | 18.04 - `jdk-11u3-ubuntu-18.04`    | 7 - `jdk-11u3-centos-7`      |
+| Alfresco 6.1  | JDK 11u3           | 18.04 - `jdk-11u3-ubuntu-18.04`    | 7 - `jdk-11u3-centos-7`      |
+| Alfresco 6.0  | JDK 11u3           | 18.04 - `jdk-11u3-ubuntu-18.04`    | 7 - `jdk-11u3-centos-7`      | 
+| Alfresco 5.2  | JDK 8u212          | 16.04 - `jdk-8u212-ubuntu-16.04`   | 7 - `jdk-8u212-centos-7`     |
+| Alfresco 5.1  | JDK 8u212          | 16.04 - `jdk-8u212-ubuntu-16.04`   | 7 - `jdk-8u212-centos-7`     |
+| Alfresco 5.0  | JDK 8u212          | 14.04 - `jdk-8u212-ubuntu-14.04`   |                              |
+| Alfresco 4.2  | JDK 7u211 (Oracle) | 14.04 - `jdk-7u211-ubuntu-14.04`   |                              |
 
 ### Operating Systems
 
@@ -130,7 +126,6 @@ At the moment, following versions are built:
 *  Ubuntu 16.04 LTS - `ubuntu:xenial`
 *  Ubuntu 14.04 LTS - `ubuntu:trusty`
 *  CentOS 7 - `centos:7`
-*  CentOS 6 - `centos:6`
 
 ## Initialization
 
@@ -158,8 +153,8 @@ To build a local version of the java image:
 
 ### How do I access the Tomcat debugport ?
 
-Set the environment variable DEBUG=true. The debug port is 8000.
+Set the environment variable `DEBUG=true`. The debug port is `8000`.
 
 ### How do I enable JMX?
 
-Set the environment variable JMX_ENABLED=true. Jmx port is 5000.
+Set the environment variable `JMX_ENABLED=true`. The JMX port is `5000`.
