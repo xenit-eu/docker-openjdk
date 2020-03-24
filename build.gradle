@@ -9,12 +9,6 @@ plugins {
     id "eu.xenit.docker" version "4.0.3" apply false
 }
 
-wrapper {
-    distributionType = Wrapper.DistributionType.ALL
-    gradleVersion = '4.10.2'
-}
-
-
 static String[] calcTags (Project project) {
     def java = project.java
     def os = project.os
