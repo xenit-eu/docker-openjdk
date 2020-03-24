@@ -274,7 +274,7 @@ task printSupportedTags {
 
 }
 
-task verifyImageTags {
+task verifyImageTags(group: 'verification') {
     doLast {
         // allTags is a map from tag -> [ projects ]
         def allTags = subprojects.collectEntries{
@@ -283,7 +283,7 @@ task verifyImageTags {
                 .collectMany { project, tags ->
                     tags.collect { new MapEntry(it, project) }
                 }
-                .groupBy { it.key }
+                .groupBy { it.key.toString() }
                 .collectEntries { [(it.key), it.value.collect{entry -> entry.value}] }
 
         // Check there are no duplicate tag declarations for the same java repo
@@ -294,10 +294,13 @@ task verifyImageTags {
                 }
 
         // Check that a few common/expected tags are actually published
-        def expectedTags = [ 'jdk-8' ]
+        println allTags.keySet().sort()
+
+        def expectedTags = [ 'jdk-8', 'jdk-11' ]
         expectedTags.each {
-            if (!allTags.containsKey(it))
-                throw new GradleException("Expected tag '$it' is not defined in any project")
+            if (!allTags.containsKey(it)) {
+                throw new GradleException("Tag '$it' is expected, but not defined in any project")
+            }
         }
     }
 }
