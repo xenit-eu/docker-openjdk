@@ -149,12 +149,6 @@ subprojects { Project project ->
         }
     }
 
-    task printTags {
-        doFirst {
-            println calcTags(project)
-        }
-    }
-
     clean.doLast {
         project.projectDir.delete()
     }
@@ -271,7 +265,15 @@ task printSupportedTags {
             println "* ${tags.collect{ "`$it`" }.join(', ')}"
         }
     }
+}
 
+task printTags {
+    doFirst {
+        project.subprojects.collect().forEach { p ->
+            println "* ${calcTags(p).reverse().collect{ tag -> "`${tag}`"}.join(', ')}"
+        }
+
+    }
 }
 
 task verifyImageTags(group: 'verification') {
