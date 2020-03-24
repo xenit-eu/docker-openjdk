@@ -6,16 +6,11 @@ import com.bmuschko.gradle.docker.tasks.container.DockerWaitContainer
 import java.util.concurrent.Callable
 
 plugins {
-    id "eu.xenit.docker" version "4.0.3" apply false
+    id "eu.xenit.docker" version "5.0.4" apply false
+    id "eu.xenit.docker-compose" version "5.0.4" apply false
 }
 
-wrapper {
-    distributionType = Wrapper.DistributionType.ALL
-    gradleVersion = '4.10.2'
-}
-
-
-static String[] calcTags (Project project) {
+static List<String> calcTags (Project project) {
     def java = project.java
     def os = project.os
     def extraTags = project.hasProperty('extraTags') ? project.extraTags : []
@@ -89,13 +84,12 @@ subprojects { Project project ->
 
     repositories {
         mavenCentral()
-        jcenter()
     }
-
 
     project.projectDir.mkdir()
 
     apply plugin: 'eu.xenit.docker'
+    apply plugin: 'eu.xenit.docker-compose'
     apply plugin: 'base'
 
     apply from: "${project.projectDir}.gradle"
@@ -134,7 +128,7 @@ subprojects { Project project ->
                 'JAVA_VERSION_UPDATE': "${project.java.version.update}"
         ]
 
-        if(project.java.version.get('extra')) {
+        if (project.java.version.get('extra')) {
             if (java.version.major < 11) {
                 buildArgs.put('JAVA_VERSION',"${project.java.version.major}u${project.java.version.update}-${project.java.version.extra}");
                 buildArgs.put('JAVA_VERSION_COMPACT',"${project.java.version.major}u${project.java.version.update}${project.java.version.extra}");
@@ -143,11 +137,12 @@ subprojects { Project project ->
                 buildArgs.put('JAVA_VERSION_COMPACT',"${project.java.version.major}.0.${project.java.version.update}_${project.java.version.extra}");
             }
         }
-        if(project.java.version.get('esum'))
-            buildArgs.put('JAVA_VERSION_ESUM',"${project.java.version.esum}")
 
-        if (project.hasProperty('extraBuildArgs'))
-            buildArgs << project.extraBuildArgs
+        if (project.java.version.get('esum')) {
+            buildArgs.put('JAVA_VERSION_ESUM', "${project.java.version.esum}")
+        }
+
+        buildArgs.putAll(project.findProperty('extraBuildArgs') ?: [:])
 
         doFirst {
             println buildArgs
@@ -279,7 +274,7 @@ task printSupportedTags {
 
 }
 
-task verifyImageTags {
+task verifyImageTags(group: 'verification') {
     doLast {
         // allTags is a map from tag -> [ projects ]
         def allTags = subprojects.collectEntries{
@@ -288,7 +283,7 @@ task verifyImageTags {
                 .collectMany { project, tags ->
                     tags.collect { new MapEntry(it, project) }
                 }
-                .groupBy { it.key }
+                .groupBy { it.key.toString() }
                 .collectEntries { [(it.key), it.value.collect{entry -> entry.value}] }
 
         // Check there are no duplicate tag declarations for the same java repo
@@ -299,10 +294,13 @@ task verifyImageTags {
                 }
 
         // Check that a few common/expected tags are actually published
-        def expectedTags = [ 'jdk-8' ]
+        println allTags.keySet().sort()
+
+        def expectedTags = [ 'jdk-8', 'jdk-11' ]
         expectedTags.each {
-            if (!allTags.containsKey(it))
-                throw new GradleException("Expected tag '$it' is not defined in any project")
+            if (!allTags.containsKey(it)) {
+                throw new GradleException("Tag '$it' is expected, but not defined in any project")
+            }
         }
     }
 }
