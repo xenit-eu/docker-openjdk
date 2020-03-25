@@ -15,18 +15,12 @@ COPY ./docker-entrypoint.sh /
 COPY ./docker-entrypoint.d/* /docker-entrypoint.d/
 
 RUN env && \
-
-    ## Hacky hacky fixing up /etc/os-release goss-test:
-    if [ ! -e /etc/os-release ]; then echo -e ID=centos\\nVERSION_ID=6 > /etc/os-release; fi && \
-
     curl -LfsSo /tmp/openjdk.tar.gz ${BINARY_URL} && \
     echo "${JAVA_VERSION_ESUM} */tmp/openjdk.tar.gz" | sha256sum -c - && \
     mkdir -p /opt/java/openjdk && \
     cd /opt/java/openjdk && \
     tar -xf /tmp/openjdk.tar.gz --strip-components=1 && \
     rm -rf /tmp/openjdk.tar.gz && \
-
-    # Cleaning up temp artifacts
     yum clean all && \
     rm -rf /var/cache/yum
 

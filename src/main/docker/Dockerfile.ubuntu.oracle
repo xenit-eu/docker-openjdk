@@ -12,7 +12,6 @@ COPY ./docker-entrypoint.sh /
 COPY ./docker-entrypoint.d/* /docker-entrypoint.d/
 
 RUN env && \
-
     apt-get update && \
     if apt-cache show openjdk-${JAVA_VERSION_MAJOR}-${JAVA_FLAVOR}=${JAVA_VERSION}* ; then apt-get install -y openjdk-${JAVA_VERSION_MAJOR}-${JAVA_FLAVOR}=${JAVA_VERSION}* ; fi && \
     apt-get --purge -y autoremove && \
