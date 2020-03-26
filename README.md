@@ -41,7 +41,7 @@ Channel [#docker](https://xenitengineering.slack.com/app_redirect?channel=docker
 
 **Maintained by:**
 
-Toon Geens <toon.geens@xenit.eu>, Roxana Angheluta <roxana.angheluta@xenit.eu>
+Toon Geens <toon.geens@xenit.eu>
 
 **Supported Architectures:**
 
