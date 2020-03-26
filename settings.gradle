@@ -1,4 +1,4 @@
-rootProject.name = 'docker-java'
+rootProject.name = 'docker-openjdk'
 
 rootProject.projectDir
     .listFiles({ File file ->
