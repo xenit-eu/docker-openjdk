@@ -1,16 +1,20 @@
+os: linux
+dist: xenial
 language: java
+jdk: openjdk8
 sudo: required
-dist: trusty
+
 services:
 - docker
+
 cache:
   directories:
   - "$HOME/.gradle"
-matrix:
-  include:
-  - os: linux
-    jdk: oraclejdk8
-    before_install:
-    - chmod +x ./gradlew
-    script:
-    - if [[ $TRAVIS_BRANCH = "master" ]] ; then ./gradlew pushDockerImage ; else ./gradlew check --info ; fi
+
+script: ./gradlew buildDockerImage check --info
+
+deploy:
+  provider: script
+  script: ./gradlew buildDockerImage
+  on:
+    branch: master
