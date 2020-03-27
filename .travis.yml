@@ -11,10 +11,11 @@ cache:
   directories:
   - "$HOME/.gradle"
 
-script: ./gradlew buildDockerImage check --info
+script: ./gradlew check --info
 
 deploy:
+  skip_cleanup: true
   provider: script
-  script: ./gradlew buildDockerImage
+  script: ./gradlew pushDockerImage
   on:
     branch: master
