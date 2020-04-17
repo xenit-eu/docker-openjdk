@@ -49,10 +49,10 @@ static Map getLatestOpenjdkJavaRelease(major, vendor, osversion) {
 
 static Map getLatestAdoptOpenjdkJavaRelease(major, vendor, osversion) {
     def result = [
-            [vendor: 'centos', osversion: '7', major: 8, update: 242, extra: 'b08', esum: 'f39b523c724d0e0047d238eb2bb17a9565a60574cf651206c867ee5fc000ab43'],
-            [vendor: 'centos', osversion: '7', major: 11, update: 6, extra: '10', esum: '330d19a2eaa07ed02757d7a785a77bab49f5ee710ea03b4ee2fa220ddd0feffc'],
-            [vendor: 'ubuntu', osversion: '18.04', major: 8, update: 242, extra: 'b08', esum: 'f39b523c724d0e0047d238eb2bb17a9565a60574cf651206c867ee5fc000ab43'],
-            [vendor: 'ubuntu', osversion: '18.04', major: 11, update: 6, extra: '10', esum: '330d19a2eaa07ed02757d7a785a77bab49f5ee710ea03b4ee2fa220ddd0feffc']
+            [vendor: 'centos', osversion: '7', major: 8, update: 252, extra: 'b09', esum: '2b59b5282ff32bce7abba8ad6b9fde34c15a98f949ad8ae43e789bbd78fc8862'],
+            [vendor: 'centos', osversion: '7', major: 11, update: 7, extra: '10', esum: 'ee60304d782c9d5654bf1a6b3f38c683921c1711045e1db94525a51b7024a2ca'],
+            [vendor: 'ubuntu', osversion: '18.04', major: 8, update: 252, extra: 'b09', esum: '2b59b5282ff32bce7abba8ad6b9fde34c15a98f949ad8ae43e789bbd78fc8862'],
+            [vendor: 'ubuntu', osversion: '18.04', major: 11, update: 7, extra: '10', esum: 'ee60304d782c9d5654bf1a6b3f38c683921c1711045e1db94525a51b7024a2ca']
     ].find { it.vendor.equals(vendor) && it.major == major && it.osversion.equals(osversion) }
     assert result != null : "No AdoptOpenJDK version ${major} found for '${vendor} ${osversion}'"
     return result
