@@ -10,7 +10,7 @@ OpenJDK Docker Images built and maintained by XeniT
 
 * `alfresco-6.0-centos`, `alfresco-6.1-centos`, `jdk-11u7-centos-7`, `jdk-11-centos-7`, `jdk-11u7-centos`, `jdk-11-centos`
 * `alfresco-6.0-ubuntu`, `alfresco-6.1-ubuntu`, `jdk-11u7-ubuntu-18.04`, `jdk-11-ubuntu-18.04`, `jdk-11u7-bionic`, `jdk-11-bionic`
-* `jdk-7u221-centos-7`, `jdk-7-centos-7`, `jdk-7u221-centos`, `jdk-7-centos`
+* `jdk-7u261-centos-7`, `jdk-7-centos-7`, `jdk-7u261-centos`, `jdk-7-centos`
 * `alfresco-5.1-centos`, `alfresco-5.2-centos`, `jdk-8u252-centos-7`, `jdk-8-centos-7`, `jdk-8u252-centos`, `jdk-8-centos`
 * `alfresco-5.0-ubuntu`, `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`, `jdk-8u252-ubuntu-18.04`, `jdk-8-ubuntu-18.04`, `jdk-8u252-bionic`, `jdk-8-bionic`, `jdk-8u252-ubuntu`, `jdk-8-ubuntu`, `jdk-8u252`, `jdk-8`
 * `alfresco-4.2-ubuntu`, `jdk-7u211-ubuntu-14.04`, `jdk-7-ubuntu-14.04`, `jdk-7u211-trusty`, `jdk-7-trusty`
