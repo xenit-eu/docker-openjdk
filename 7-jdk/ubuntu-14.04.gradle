@@ -2,7 +2,7 @@ ext {
     java = [
             vendor: 'oracle',
             flavor: 'jdk',
-            version: rootProject.getLatestOpenjdkJavaRelease(7,'ubuntu','14.04')
+            version: ORACLEOPENJDK[7]['ubuntu']
     ]
     os = [
             vendor: 'ubuntu',

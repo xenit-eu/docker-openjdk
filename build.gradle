@@ -38,25 +38,20 @@ static List<String> calcTags (Project project) {
     return extraTags + tags
 }
 
-static Map getLatestOpenjdkJavaRelease(major, vendor, osversion) {
-    def result = [
-            [vendor: 'centos', osversion: '7', major: 7, update: 261],
-            [vendor: 'ubuntu', osversion: '14.04', major: 7, update: 211],
-    ].find { it.vendor.equals(vendor) && it.major == major && it.osversion.equals(osversion) }
-    assert result != null : "No JDK version ${major} found for '${vendor} ${osversion}'"
-    return result
+ext {
+    ADOPTOPENJDK = [
+            8 : [major: 8, update: 252, extra: 'b09', esum: '2b59b5282ff32bce7abba8ad6b9fde34c15a98f949ad8ae43e789bbd78fc8862'],
+            11: [major: 11, update: 7, extra: '10', esum: 'ee60304d782c9d5654bf1a6b3f38c683921c1711045e1db94525a51b7024a2ca'],
+    ]
+
+    ORACLEOPENJDK = [
+            7: [
+                    'centos': [major: 7, update: 261],
+                    'ubuntu': [major: 7, update: 211]
+            ]
+    ]
 }
 
-static Map getLatestAdoptOpenjdkJavaRelease(major, vendor, osversion) {
-    def result = [
-            [vendor: 'centos', osversion: '7', major: 8, update: 252, extra: 'b09', esum: '2b59b5282ff32bce7abba8ad6b9fde34c15a98f949ad8ae43e789bbd78fc8862'],
-            [vendor: 'centos', osversion: '7', major: 11, update: 7, extra: '10', esum: 'ee60304d782c9d5654bf1a6b3f38c683921c1711045e1db94525a51b7024a2ca'],
-            [vendor: 'ubuntu', osversion: '18.04', major: 8, update: 252, extra: 'b09', esum: '2b59b5282ff32bce7abba8ad6b9fde34c15a98f949ad8ae43e789bbd78fc8862'],
-            [vendor: 'ubuntu', osversion: '18.04', major: 11, update: 7, extra: '10', esum: 'ee60304d782c9d5654bf1a6b3f38c683921c1711045e1db94525a51b7024a2ca']
-    ].find { it.vendor.equals(vendor) && it.major == major && it.osversion.equals(osversion) }
-    assert result != null : "No AdoptOpenJDK version ${major} found for '${vendor} ${osversion}'"
-    return result
-}
 
 static Map getDefaultOsVersion(vendor) {
     [
