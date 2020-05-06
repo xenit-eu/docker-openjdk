@@ -1,11 +1,11 @@
 ext {
     java = [
-            vendor: 'oracle',
-            flavor: 'jdk',
+            vendor : 'oracle',
+            flavor : 'jdk',
             version: ORACLEOPENJDK[7]['centos']
     ]
     os = [
-            vendor: 'centos',
+            vendor : 'centos',
             version: '7'
     ]
 }

@@ -1,13 +1,13 @@
 ext {
     java = [
-            vendor: 'adoptopenjdk',
-            flavor: 'jdk',
+            vendor : 'adoptopenjdk',
+            flavor : 'jdk',
             version: ADOPTOPENJDK[8]
     ]
     os = [
-            vendor: 'ubuntu',
+            vendor : 'ubuntu',
             version: '18.04',
-            name: 'bionic'
+            name   : 'bionic'
     ]
-    extraTags = [ "alfresco-5.0-ubuntu", "alfresco-5.1-ubuntu", "alfresco-5.2-ubuntu" ]
+    extraTags = ["alfresco-5.0-ubuntu", "alfresco-5.1-ubuntu", "alfresco-5.2-ubuntu"]
 }
