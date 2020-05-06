@@ -2,7 +2,7 @@ ext {
     java = [
             vendor: 'adoptopenjdk',
             flavor: 'jdk',
-            version: rootProject.getLatestAdoptOpenjdkJavaRelease(11,'centos','7')
+            version: ADOPTOPENJDK[11]
     ]
     os = [
             vendor: 'centos',

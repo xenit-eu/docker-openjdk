@@ -2,7 +2,7 @@ ext {
     java = [
             vendor: 'adoptopenjdk',
             flavor: 'jdk',
-            version: rootProject.getLatestAdoptOpenjdkJavaRelease(8,'ubuntu','18.04')
+            version: ADOPTOPENJDK[8]
     ]
     os = [
             vendor: 'ubuntu',
