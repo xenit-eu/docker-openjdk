@@ -1,17 +1,17 @@
 ext {
     java = [
-            vendor: 'oracle',
-            flavor: 'jdk',
+            vendor : 'oracle',
+            flavor : 'jdk',
             version: ORACLEOPENJDK[7]['ubuntu']
     ]
     os = [
-            vendor: 'ubuntu',
+            vendor : 'ubuntu',
             version: '14.04',
-            name: 'trusty'
+            name   : 'trusty'
     ]
     // version reported by java -version is different than the version installed
     extraBuildArgs = [
             JAVA_VERSION_REPORTED: '1.7.0_201'
     ]
-    extraTags = [ "alfresco-4.2-ubuntu" ]
+    extraTags = ["alfresco-4.2-ubuntu"]
 }

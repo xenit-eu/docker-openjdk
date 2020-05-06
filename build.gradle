@@ -10,7 +10,7 @@ plugins {
     id "eu.xenit.docker-compose" version "5.0.4" apply false
 }
 
-static List<String> calcTags (Project project) {
+static List<String> calcTags(Project project) {
     def java = project.java
     def os = project.os
     def extraTags = project.hasProperty('extraTags') ? project.extraTags : []
@@ -55,8 +55,8 @@ ext {
 
 static Map getDefaultOsVersion(vendor) {
     [
-            [ vendor: 'ubuntu', version: '18.04'],
-            [ vendor: 'centos', version: '7']
+            [vendor: 'ubuntu', version: '18.04'],
+            [vendor: 'centos', version: '7']
     ].find { it.vendor == vendor }
 }
 
@@ -114,20 +114,20 @@ subprojects { Project project ->
 
     buildDockerImage {
         buildArgs = [
-                'BASE_IMAGE': "${project.os.vendor}:${project.os.version}",
+                'BASE_IMAGE'         : "${project.os.vendor}:${project.os.version}",
 
-                'JAVA_FLAVOR': project.java.flavor,
-                'JAVA_VERSION_MAJOR': "${project.java.version.major}",
+                'JAVA_FLAVOR'        : project.java.flavor,
+                'JAVA_VERSION_MAJOR' : "${project.java.version.major}",
                 'JAVA_VERSION_UPDATE': "${project.java.version.update}"
         ]
 
         if (project.java.version.get('extra')) {
             if (java.version.major < 11) {
-                buildArgs.put('JAVA_VERSION',"${project.java.version.major}u${project.java.version.update}-${project.java.version.extra}");
-                buildArgs.put('JAVA_VERSION_COMPACT',"${project.java.version.major}u${project.java.version.update}${project.java.version.extra}");
+                buildArgs.put('JAVA_VERSION', "${project.java.version.major}u${project.java.version.update}-${project.java.version.extra}");
+                buildArgs.put('JAVA_VERSION_COMPACT', "${project.java.version.major}u${project.java.version.update}${project.java.version.extra}");
             } else {
-                buildArgs.put('JAVA_VERSION',"-${project.java.version.major}.0.${project.java.version.update}+${project.java.version.extra}");
-                buildArgs.put('JAVA_VERSION_COMPACT',"${project.java.version.major}.0.${project.java.version.update}_${project.java.version.extra}");
+                buildArgs.put('JAVA_VERSION', "-${project.java.version.major}.0.${project.java.version.update}+${project.java.version.extra}");
+                buildArgs.put('JAVA_VERSION_COMPACT', "${project.java.version.major}.0.${project.java.version.update}_${project.java.version.extra}");
             }
         }
 
@@ -249,13 +249,13 @@ subprojects { Project project ->
 task printSupportedTags {
     doFirst {
 
-        def currentTags = (subprojects).collect{ calcTags(it) }
+        def currentTags = (subprojects).collect { calcTags(it) }
 
         println '## Supported tags'
         println ''
 
         currentTags.each { tags ->
-            println "* ${tags.collect{ "`$it`" }.join(', ')}"
+            println "* ${tags.collect { "`$it`" }.join(', ')}"
         }
     }
 }
@@ -263,7 +263,7 @@ task printSupportedTags {
 task printTags {
     doFirst {
         project.subprojects.collect().forEach { p ->
-            println "* ${calcTags(p).reverse().collect{ tag -> "`${tag}`"}.join(', ')}"
+            println "* ${calcTags(p).reverse().collect { tag -> "`${tag}`" }.join(', ')}"
         }
 
     }
@@ -272,14 +272,14 @@ task printTags {
 task verifyImageTags(group: 'verification') {
     doLast {
         // allTags is a map from tag -> [ projects ]
-        def allTags = subprojects.collectEntries{
+        def allTags = subprojects.collectEntries {
             [(it): calcTags(it)]
         }
                 .collectMany { project, tags ->
                     tags.collect { new MapEntry(it, project) }
                 }
                 .groupBy { it.key.toString() }
-                .collectEntries { [(it.key), it.value.collect{entry -> entry.value}] }
+                .collectEntries { [(it.key), it.value.collect { entry -> entry.value }] }
 
         // Check there are no duplicate tag declarations for the same java repo
         allTags
@@ -291,7 +291,7 @@ task verifyImageTags(group: 'verification') {
         // Check that a few common/expected tags are actually published
         println allTags.keySet().sort()
 
-        def expectedTags = [ 'jdk-8', 'jdk-11' ]
+        def expectedTags = ['jdk-8', 'jdk-11']
         expectedTags.each {
             if (!allTags.containsKey(it)) {
                 throw new GradleException("Tag '$it' is expected, but not defined in any project")
