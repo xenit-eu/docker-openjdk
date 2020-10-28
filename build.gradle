@@ -6,8 +6,8 @@ import com.bmuschko.gradle.docker.tasks.container.DockerWaitContainer
 import java.util.concurrent.Callable
 
 plugins {
-    id "eu.xenit.docker" version "5.0.4" apply false
-    id "eu.xenit.docker-compose" version "5.0.4" apply false
+    id "eu.xenit.docker" version "5.1.0" apply false
+    id "eu.xenit.docker-compose" version "5.1.0" apply false
 }
 
 static List<String> calcTags(Project project) {
@@ -102,14 +102,10 @@ subprojects { Project project ->
 
     buildDockerImage.dependsOn(copyDocker)
 
-    dockerFile {
+    dockerBuild {
         dockerFile = file("${project.buildDir}/docker/Dockerfile")
-        dockerBuild {
-            repository = "docker.io/xenit/openjdk"
-            tags = calcTags(project)
-            pull = true
-            automaticTags = false
-        }
+        repositories = ["docker.io/xenit/openjdk"]
+        tags = calcTags(project)
     }
 
     buildDockerImage {
