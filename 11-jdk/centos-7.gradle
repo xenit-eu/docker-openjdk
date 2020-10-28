@@ -8,5 +8,5 @@ ext {
             vendor : 'centos',
             version: '7'
     ]
-    extraTags = ["alfresco-6.0-centos", "alfresco-6.1-centos"]
+    extraTags = ["alfresco-6.0-centos", "alfresco-6.1-centos", "alfresco-6.2-centos"]
 }

@@ -4,17 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## 2020-10
+
+### Changed
+
+* [2020-10-28] [PR #18](https://github.com/xenit-eu/docker-openjdk/pull/18) Updated to jdk-11.0.9 and jdk-8u272
+
 ## 2020-05
 
 ### Changed
 
-* [2020-0506-0001] [PR #14](https://github.com/xenit-eu/docker-openjdk/pull/14) Updated jdk-7 on CentOS from 7u221 to 7u261
+* [2020-05-06] [PR #14](https://github.com/xenit-eu/docker-openjdk/pull/14) Updated jdk-7 on CentOS from 7u221 to 7u261
 
 ## 2020-04
 
 ### Changed
 
-* [2020-0417-0001] [PR #13](https://github.com/xenit-eu/docker-openjdk/pull/13) Updated to [jdk-11.0.7](https://adoptopenjdk.net/release_notes.html?jvmVariant=hotspot#jdk11_0_7) and [jdk-8u252](https://adoptopenjdk.net/release_notes.html?jvmVariant=hotspot#jdk8u252)
+* [2020-04-17] [PR #13](https://github.com/xenit-eu/docker-openjdk/pull/13) Updated to [jdk-11.0.7](https://adoptopenjdk.net/release_notes.html?jvmVariant=hotspot#jdk11_0_7) and [jdk-8u252](https://adoptopenjdk.net/release_notes.html?jvmVariant=hotspot#jdk8u252)
 
 ## 2020-03
 
