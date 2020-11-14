@@ -40,8 +40,8 @@ static List<String> calcTags(Project project) {
 
 ext {
     ADOPTOPENJDK = [
-            8 : [major: 8, update: 272, extra: 'b10', esum: '6f124b69d07d8d3edf39b9aa5c58473f63a380b686ddb73a5495e01d25c2939a'],
-            11: [major: 11, update: 9, extra: '11', esum: 'a3c52b73a76bed0f113604165eb4f2020b767e188704d8cc0bfc8bc4eb596712'],
+            8 : [major: 8, update: 275, extra: 'b01', esum: '06fb04075ed503013beb12ab87963b2ca36abe9e397a0c298a57c1d822467c29'],
+            11: [major: 11, update: 9.1, extra: '1', esum: 'e388fd7f3f2503856d0b04fde6e151cbaa91a1df3bcebf1deddfc3729d677ca3'],
     ]
 
     ORACLEOPENJDK = [
@@ -122,7 +122,7 @@ subprojects { Project project ->
                 buildArgs.put('JAVA_VERSION', "${project.java.version.major}u${project.java.version.update}-${project.java.version.extra}");
                 buildArgs.put('JAVA_VERSION_COMPACT', "${project.java.version.major}u${project.java.version.update}${project.java.version.extra}");
             } else {
-                buildArgs.put('JAVA_VERSION', "-${project.java.version.major}.0.${project.java.version.update}+${project.java.version.extra}.1");
+                buildArgs.put('JAVA_VERSION', "-${project.java.version.major}.0.${project.java.version.update}+${project.java.version.extra}");
                 buildArgs.put('JAVA_VERSION_COMPACT', "${project.java.version.major}.0.${project.java.version.update}_${project.java.version.extra}");
             }
         }
