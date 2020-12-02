@@ -1,7 +1,11 @@
 name: ci
-on: [push, pull_request]
+on: [ push, pull_request ]
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps: 
-      - run: echo yes
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - run: ./gradlew check --info
