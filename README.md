@@ -15,6 +15,11 @@ OpenJDK Docker Images built and maintained by XeniT
 * `alfresco-5.0-ubuntu`, `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`, `jdk-8u275-ubuntu-18.04`, `jdk-8-ubuntu-18.04`, `jdk-8u275-bionic`, `jdk-8-bionic`, `jdk-8u275-ubuntu`, `jdk-8-ubuntu`, `jdk-8u275`, `jdk-8`
 * `alfresco-4.2-ubuntu`, `jdk-7u211-ubuntu-14.04`, `jdk-7-ubuntu-14.04`, `jdk-7u211-trusty`, `jdk-7-trusty`
 
+Additional tags are provided:
+* tags containing a `-SNAPSHOT` or `-SNAPSHOT-yyyymmdd.hhmm` postfix are development artifacts (from the master branch). Do not use them in a production environment.
+* tags without any postfix or containing a `-yyyymmdd` postfix are release artifacts
+
+**NOTE**: Timestamped tags are **NOT** maintained.
 
 ## Environment variables
 
@@ -23,14 +28,14 @@ The variables are read by an init script which further appends to to JAVA_OPTS.
 
 Environment variables:
 
-| Variable                    |  Default                        | Java variable |
-| --------------------------- | ------------------------------- | --------------------------- |
-| JAVA_XMS                    |                                   | -Xmx                                                         |                                                              |  |
-| JAVA_XMX                    |                                   | -Xms                                                         |                                                              |  |
-| DEBUG                       |                                   | -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n |     false                                                         |  |
-| JMX_ENABLED                 |                                   | -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.rmi.port=5000 -Dcom.sun.management.jmxremote.port=5000 -Djava.rmi.server.hostname=$JMX_RMI_HOST |     false                                                         |  |
-| JMX_RMI_HOST                |                                   |                                                              |  0.0.0.0                                                            |  |
-| JAVA_OPTS_\<variable\>=\<value\>       |                      | \<value\>                                                   |                                                              |  |
+| Variable                         |  Default  | Java variable |
+| -------------------------------- | --------- | ------------- |
+| JAVA_XMS                         |           | -Xmx          |
+| JAVA_XMX                         |           | -Xms          |
+| DEBUG                            | false     | -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n |
+| JMX_ENABLED                      | false     | -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.rmi.port=5000 -Dcom.sun.management.jmxremote.port=5000 -Djava.rmi.server.hostname=$JMX_RMI_HOST |
+| JMX_RMI_HOST                     | 0.0.0.0   |               |
+| JAVA_OPTS_\<variable\>=\<value\> | \<value\> | \<variable\>  |                                                             |  |
 
 
 ## Quick reference
@@ -111,9 +116,9 @@ At the moment, following versions are built:
 
 | Alfresco      | OpenJDk            | Ubuntu                             | CentOS                       |
 | ------------- | ------------------ | ---------------------------------- | ---------------------------- |
-| Alfresco 6.2  | JDK 11u9.1           | 18.04 - `jdk-11u9.1-ubuntu-18.04`    | 7 - `jdk-11u9.1-centos-7`      |
-| Alfresco 6.1  | JDK 11u9.1           | 18.04 - `jdk-11u9.1-ubuntu-18.04`    | 7 - `jdk-11u9.1-centos-7`      |
-| Alfresco 6.0  | JDK 11u9.1           | 18.04 - `jdk-11u9.1-ubuntu-18.04`    | 7 - `jdk-11u9.1-centos-7`      |
+| Alfresco 6.2  | JDK 11u9.1         | 18.04 - `jdk-11u9.1-ubuntu-18.04`  | 7 - `jdk-11u9.1-centos-7`    |
+| Alfresco 6.1  | JDK 11u9.1         | 18.04 - `jdk-11u9.1-ubuntu-18.04`  | 7 - `jdk-11u9.1-centos-7`    |
+| Alfresco 6.0  | JDK 11u9.1         | 18.04 - `jdk-11u9.1-ubuntu-18.04`  | 7 - `jdk-11u9.1-centos-7`    |
 | Alfresco 5.2  | JDK 8u275          | 18.04 - `jdk-8u275-ubuntu-18.04`   | 7 - `jdk-8u275-centos-7`     |
 | Alfresco 5.1  | JDK 8u275          | 18.04 - `jdk-8u275-ubuntu-18.04`   | 7 - `jdk-8u275-centos-7`     |
 | Alfresco 5.0  | JDK 8u275          | 18.04 - `jdk-8u275-ubuntu-18.04`   |                              |
@@ -140,7 +145,7 @@ You can override or disable the initialization scripts by overriding the `ENTRYP
 
 ### How to build
 
-Release builds are produced by [Travis](https://travis-ci.org/xenit-eu/) driving Gradle from a `.travis.yml` file.
+Builds are produced by [GitHub Actions](https://docs.github.com/en/free-pro-team@latest/actions) driving Gradle from a GitHub workflow file.
 
 To build a local version of the java image:
 
@@ -150,7 +155,7 @@ To build a local version of the java image:
 
 ## FAQ
 
-### How do I access the Tomcat debugport ?
+### How do I access the Java debug port?
 
 Set the environment variable `DEBUG=true`. The debug port is `8000`.
 
