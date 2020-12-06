@@ -6,8 +6,8 @@ import com.bmuschko.gradle.docker.tasks.container.DockerWaitContainer
 import java.util.concurrent.Callable
 
 plugins {
-    id "eu.xenit.docker" version "5.1.0" apply false
-    id "eu.xenit.docker-compose" version "5.1.0" apply false
+    id "eu.xenit.docker" version "5.1.1" apply false
+    id "eu.xenit.docker-compose" version "5.1.1" apply false
 }
 
 static List<String> calcTags(Project project) {
