@@ -1,0 +1,29 @@
+name: 'Scheduled Build'
+on:
+  schedule:
+    - cron: '7 0 * * SAT'
+
+jobs:
+  scheduledBuild:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        branch: [master, release]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ matrix.branch }}
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: 'Build & Test'
+        env:
+          BRANCH_NAME: ${{ matrix.branch }}
+        run: ./gradlew check -PbrancheName=$BRANCH_NAME --info
+      - name: 'Publish docker image'
+        if: ${{ startsWith(matrix.branch, 'master') || startsWith(matrix.branch, 'release') }}
+        env:
+          BRANCH_NAME: ${{ matrix.branch }}
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: ./gradlew pushDockerImage -PbranchName=$BRANCH_NAME --info
