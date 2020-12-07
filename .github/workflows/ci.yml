@@ -12,7 +12,7 @@ jobs:
       - name: 'Build & Test'
         env:
           BRANCH_NAME: ${{ github.ref }}
-        run: ./gradlew check -PbrancheName=$BRANCH_NAME --info
+        run: ./gradlew check -PbranchName=$BRANCH_NAME --info
       - name: 'Publish docker image'
         if: ${{ startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/release') }}
         env:

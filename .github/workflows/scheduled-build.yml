@@ -19,9 +19,9 @@ jobs:
       - name: 'Build & Test'
         env:
           BRANCH_NAME: ${{ matrix.branch }}
-        run: ./gradlew check -PbrancheName=$BRANCH_NAME --info
+        run: ./gradlew check -PbranchName=$BRANCH_NAME --info
       - name: 'Publish docker image'
-        if: ${{ startsWith(matrix.branch, 'master') || startsWith(matrix.branch, 'release') }}
+        if: ${{ ('master' == matrix.branch) || ('release' == matrix.branch) }}
         env:
           BRANCH_NAME: ${{ matrix.branch }}
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
