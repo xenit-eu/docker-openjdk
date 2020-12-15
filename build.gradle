@@ -52,13 +52,8 @@ static List<String> calcTags(Project project) {
     }
 
     def allTags = extraTags + tags
-    def branchName = getBranchName(project)
-    def tagsWithQualifier = allTags.collect { it + getTagQualifier(branchName) }
-
-    if (!branchName.endsWith('release')) {
-        return tagsWithQualifier
-    }
-    return allTags + tagsWithQualifier
+    def tagsWithQualifier = allTags.collect { it + getTagQualifier(getBranchName(project)) }
+    return tagsWithQualifier
 }
 
 ext {
