@@ -16,15 +16,16 @@ OpenJDK Docker Images built and maintained by XeniT
 * `alfresco-4.2-ubuntu`, `jdk-7u211-ubuntu-14.04`, `jdk-7-ubuntu-14.04`, `jdk-7u211-trusty`, `jdk-7-trusty`
 
 Additional tags are provided:
-* tags containing a `-SNAPSHOT` or `-SNAPSHOT-yyyymmdd.hhmm` postfix are development artifacts (from the master branch). Do not use them in a production environment.
-* tags without any postfix or containing a `-yyyymmdd` postfix are release artifacts
+* tags containing a `-SNAPSHOT` postfix are development artifacts (from the master branch). Do not use them in a 
+  production environment.
+* tags without any postfix are release artifacts
 
-**NOTE**: Timestamped tags are **NOT** maintained.
 
 ## Environment variables
 
-There are several environment variables available to tweak the behaviour. While none of the variables are required, they may significantly aid you in using these images.
-The variables are read by an init script which further appends to to JAVA_OPTS.
+There are several environment variables available to tweak the behaviour. While none of the variables are required, 
+they may significantly aid you in using these images.
+The variables are read by an init script which further appends to JAVA_OPTS.
 
 Environment variables:
 
@@ -63,11 +64,15 @@ The `docker.io/xenit/openjdk` image supports the following environment variables
 
 ### JAVA_OPTS_xxx
 
-This image iterates over all environment variables that start with `JAVA_OPTS_` and collects them into the environment variable `JAVA_OPTS` when the container is started. This `JAVA_OPTS` variable can be used to pass JVM arguments to the _java_ process.
+This image iterates over all environment variables that start with `JAVA_OPTS_` and collects them into the environment 
+variable `JAVA_OPTS` when the container is started. This `JAVA_OPTS` variable can be used to pass JVM arguments to 
+the _java_ process.
 
 The environment variable should have the format `JAVA_OPTS_xxx="-Dkey=value"`, where the key `xxx` is ignored.
 
-_Note:_ This ignored key can be useful, when you want to override a particular JVM argument when using multiple _docker-compose.yml_ files or _docker-compose.override.yml_. See the [Docker Compose documentation](https://docs.docker.com/compose/extends/#example-use-case) for more information.
+_Note:_ This ignored key can be useful, when you want to override a particular JVM argument when using multiple 
+_docker-compose.yml_ files or _docker-compose.override.yml_. See the 
+[Docker Compose documentation](https://docs.docker.com/compose/extends/#example-use-case) for more information.
 
 ## Image variants
 
@@ -100,10 +105,13 @@ based on the latest LTS release, of that distribution.
     - `jdk-11-ubuntu`
     - `jdk-11-centos`
 
-**NOTE**: the Java _update_ (=minor version) is **NOT** maintained. For example: the current Ubuntu JDK 8 image is tagged with `jdk-8-ubuntu-18.04` and has the additional tag `jdk-8u275-ubuntu-18.04` to indicate the Java 8 _update_ version. 
-Once the next update is published, the image tagged `jdk-8-ubuntu-18.04` will be updated, but `jdk-8u275-ubuntu-18.04` will no longer be supported and will not receive OS or Java security patches.
+**NOTE**: the Java _update_ (=minor version) is **NOT** maintained. For example: the current Ubuntu JDK 8 image is 
+tagged with `jdk-8-ubuntu-18.04` and has the additional tag `jdk-8u275-ubuntu-18.04` to indicate the Java 8 _update_ version. 
+Once the next update is published, the image tagged `jdk-8-ubuntu-18.04` will be updated, but `jdk-8u275-ubuntu-18.04` 
+will no longer be supported and will not receive OS or Java security patches.
 
-Images are used as base images for building Alfresco. Supported stack for Alfresco is documented at (replace capital X's with the desired version):
+Images are used as base images for building Alfresco. The supported stack for Alfresco is documented at (replace 
+capital X's with the desired version):
 
 * https://www.alfresco.com/sites/www.alfresco.com/files//supported_platforms_for_alfresco_enterprise_X.X.x.pdf for Alfresco <5.2
 * https://docs.alfresco.com/X.X/concepts/supported-platforms-ACS.html for Alfresco >=5.2
@@ -135,17 +143,22 @@ At the moment, following versions are built:
 
 This image uses Docker `ENTRYPOINT` to provide initialization hooks.
 
-If you would like to do additional initialization in an image derived from this one, add one or more `*.sh` scripts under `/docker-entrypoint.d/`. The scripts are _source_'d and do not need to be executable. This means these scripts run within the existing shell, any variables created or modified by the script will remain available after the script completes. These initialization scripts will be executed in sorted name order as defined by the current locale.
+If you would like to do additional initialization in an image derived from this one, add one or more `*.sh` scripts 
+under `/docker-entrypoint.d/`. The scripts are _source_'d and do not need to be executable. This means these scripts 
+run within the existing shell, any variables created or modified by the script will remain available after the script 
+completes. These initialization scripts will be executed in sorted name order as defined by the current locale.
 
 After initialization completes, the main `CMD` will be _exec_'ed, to avoid starting the main process in a subshell.
 
-You can override or disable the initialization scripts by overriding the `ENTRYPOINT` instruction using the `docker run --entrypoint` flag.
+You can override or disable the initialization scripts by overriding the `ENTRYPOINT` instruction using the 
+`docker run --entrypoint` flag.
 
 ## Contributions
 
 ### How to build
 
-Builds are produced by [GitHub Actions](https://docs.github.com/en/free-pro-team@latest/actions) driving Gradle from a GitHub workflow file.
+Builds are produced by [GitHub Actions](https://docs.github.com/en/free-pro-team@latest/actions) driving Gradle from a
+GitHub workflow file.
 
 To build a local version of the java image:
 

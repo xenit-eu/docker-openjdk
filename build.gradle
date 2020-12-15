@@ -3,7 +3,6 @@ import com.avast.gradle.dockercompose.tasks.ComposeDown
 import com.avast.gradle.dockercompose.tasks.ComposeUp
 import com.bmuschko.gradle.docker.tasks.container.DockerWaitContainer
 
-import java.text.SimpleDateFormat
 import java.util.concurrent.Callable
 
 plugins {
@@ -25,16 +24,6 @@ static String getTagQualifier(String branchName) {
     }
 
     return '-' + branchName.split('/').last() + '-SNAPSHOT'
-}
-
-static String getBuildTime(String branchName) {
-    def dateFormatPattern = "-yyyyMMdd"
-    if (!branchName.endsWith('release')) {
-        dateFormatPattern += ".HHmm"
-    }
-    def df = new SimpleDateFormat(dateFormatPattern)
-    df.setTimeZone(TimeZone.getTimeZone("UTC"))
-    return df.format(new Date())
 }
 
 static List<String> calcTags(Project project) {
@@ -63,17 +52,13 @@ static List<String> calcTags(Project project) {
     }
 
     def allTags = extraTags + tags
-
     def branchName = getBranchName(project)
-    def tagQualifier = getTagQualifier(branchName)
-    def buildTime = getBuildTime(branchName)
-    def tagsWithQualifier = allTags.collect { it + "${tagQualifier}" }
-    def timestampedTagsWithQualifier = allTags.collect { it + "${tagQualifier}${buildTime}" }
+    def tagsWithQualifier = allTags.collect { it + getTagQualifier(branchName) }
 
-    if (!branchName.endsWith('release') && !branchName.equals('local')) {
-        return tagsWithQualifier + timestampedTagsWithQualifier
+    if (!branchName.endsWith('release')) {
+        return tagsWithQualifier
     }
-    return allTags + timestampedTagsWithQualifier
+    return allTags + tagsWithQualifier
 }
 
 ext {
