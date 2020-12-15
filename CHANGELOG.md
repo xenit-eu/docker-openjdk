@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## 2020-12
+* [2020-12-14] [PR #22](https://github.com/xenit-eu/docker-openjdk/pull/22) Go back to jdk-11.0.9 to be able to use it for alfresco search services 2.0.x
 * [2020-12-06] [PR #21](https://github.com/xenit-eu/docker-openjdk/pull/21) Move build from Travis to GitHub Actions
 
 ## 2020-11
