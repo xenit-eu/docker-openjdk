@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 # 2021-02
-* [2021-02-01](https://github.com/xenit-eu/docker-openjdk/pull/26) Update to jdk-11.0.10+9
+* [2021-02-01] [PR #26](https://github.com/xenit-eu/docker-openjdk/pull/26) Update to jdk-11.0.10+9
 
 ## 2020-12
 * [2020-12-14] [PR #22](https://github.com/xenit-eu/docker-openjdk/pull/22) Go back to jdk-11.0.9 to be able to use it for alfresco search services 2.0.x
