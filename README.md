@@ -8,8 +8,8 @@ OpenJDK Docker Images built and maintained by XeniT
 
 ## Supported Tags
 
-* `alfresco-6.0-centos`, `alfresco-6.1-centos`, `alfresco-6.2-centos`,  `jdk-11u9.1-centos-7`, `jdk-11-centos-7`, `jdk-11u9.1-centos`, `jdk-11-centos`
-* `alfresco-6.0-ubuntu`, `alfresco-6.1-ubuntu`, `alfresco-6.2-ubuntu`, `jdk-11u9.1-ubuntu-18.04`, `jdk-11-ubuntu-18.04`, `jdk-11u9.1-bionic`, `jdk-11-bionic`
+* `alfresco-6.0-centos`, `alfresco-6.1-centos`, `alfresco-6.2-centos`,  `jdk-11u10-centos-7`, `jdk-11-centos-7`, `jdk-11u10-centos`, `jdk-11-centos`
+* `alfresco-6.0-ubuntu`, `alfresco-6.1-ubuntu`, `alfresco-6.2-ubuntu`, `jdk-11u10-ubuntu-18.04`, `jdk-11-ubuntu-18.04`, `jdk-11u10-bionic`, `jdk-11-bionic`
 * `jdk-7u261-centos-7`, `jdk-7-centos-7`, `jdk-7u261-centos`, `jdk-7-centos`
 * `alfresco-5.1-centos`, `alfresco-5.2-centos`, `jdk-8u275-centos-7`, `jdk-8-centos-7`, `jdk-8u275-centos`, `jdk-8-centos`
 * `alfresco-5.0-ubuntu`, `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`, `jdk-8u275-ubuntu-18.04`, `jdk-8-ubuntu-18.04`, `jdk-8u275-bionic`, `jdk-8-bionic`, `jdk-8u275-ubuntu`, `jdk-8-ubuntu`, `jdk-8u275`, `jdk-8`
@@ -124,9 +124,9 @@ At the moment, following versions are built:
 
 | Alfresco      | OpenJDk            | Ubuntu                             | CentOS                       |
 | ------------- | ------------------ | ---------------------------------- | ---------------------------- |
-| Alfresco 6.2  | JDK 11u9.1         | 18.04 - `jdk-11u9.1-ubuntu-18.04`  | 7 - `jdk-11u9.1-centos-7`    |
-| Alfresco 6.1  | JDK 11u9.1         | 18.04 - `jdk-11u9.1-ubuntu-18.04`  | 7 - `jdk-11u9.1-centos-7`    |
-| Alfresco 6.0  | JDK 11u9.1         | 18.04 - `jdk-11u9.1-ubuntu-18.04`  | 7 - `jdk-11u9.1-centos-7`    |
+| Alfresco 6.2  | JDK 11u10         | 18.04 - `jdk-11u10-ubuntu-18.04`  | 7 - `jdk-11u10-centos-7`    |
+| Alfresco 6.1  | JDK 11u10         | 18.04 - `jdk-11u10-ubuntu-18.04`  | 7 - `jdk-11u10-centos-7`    |
+| Alfresco 6.0  | JDK 11u10         | 18.04 - `jdk-11u10-ubuntu-18.04`  | 7 - `jdk-11u10-centos-7`    |
 | Alfresco 5.2  | JDK 8u275          | 18.04 - `jdk-8u275-ubuntu-18.04`   | 7 - `jdk-8u275-centos-7`     |
 | Alfresco 5.1  | JDK 8u275          | 18.04 - `jdk-8u275-ubuntu-18.04`   | 7 - `jdk-8u275-centos-7`     |
 | Alfresco 5.0  | JDK 8u275          | 18.04 - `jdk-8u275-ubuntu-18.04`   |                              |

@@ -59,7 +59,7 @@ static List<String> calcTags(Project project) {
 ext {
     ADOPTOPENJDK = [
             8 : [major: 8, update: 275, extra: 'b01', esum: '06fb04075ed503013beb12ab87963b2ca36abe9e397a0c298a57c1d822467c29'],
-            11: [major: 11, update: 9, extra: '11', esum: 'fc8af86bc0cff91e1f96860d22a9611fdaa74a53d68f88ffb887d998593370a1']
+            11: [major: 11, update: 10, extra: '9', esum: 'ae78aa45f84642545c01e8ef786dfd700d2226f8b12881c844d6a1f71789cb99']
     ]
 
     ORACLEOPENJDK = [
