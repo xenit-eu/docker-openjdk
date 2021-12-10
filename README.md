@@ -8,13 +8,20 @@ OpenJDK Docker Images built and maintained by XeniT
 
 ## Supported Tags
 
-* `alfresco-6.0-ubuntu`, `alfresco-6.1-ubuntu`, `alfresco-6.2-ubuntu`, `jdk-11u13-ubuntu-18.04`, `jdk-11-ubuntu-18.04`, `jdk-11u13-bionic`, `jdk-11-bionic`
-* `alfresco-5.0-ubuntu`, `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`, `jdk-8u275-ubuntu-18.04`, `jdk-8-ubuntu-18.04`, `jdk-8u312-bionic`, `jdk-8-bionic`, `jdk-8u312-ubuntu`, `jdk-8-ubuntu`, `jdk-8u312`, `jdk-8`
-* `alfresco-4.2-ubuntu`, `jdk-7u211-ubuntu-14.04`, `jdk-7-ubuntu-14.04`, `jdk-7u211-trusty`, `jdk-7-trusty`
+* `jdk-11-ubuntu-18.04`, `jdk-11-bionic`, `jdk-11`
+* `jdk-8-ubuntu-18.04`, `jdk-8-bionic`, `jdk-8-ubuntu`, `jdk-8`
+* `jdk-7-ubuntu-14.04`, `jdk-7-trusty`
+
+### Alfresco Compatible Tags
+
+* JDK 11: `alfresco-6.0-ubuntu`, `alfresco-6.1-ubuntu`, `alfresco-6.2-ubuntu`
+* JDK 8: `alfresco-5.0-ubuntu`, `alfresco-5.1-ubuntu`, `alfresco-5.2-ubuntu`
+* JDK 7: `alfresco-4.2-ubuntu`, `jdk-7u211-ubuntu-14.04`, `jdk-7-ubuntu-14.04`
+
 
 Additional tags are provided:
-* tags containing a `-SNAPSHOT` postfix are development artifacts (from the master branch). Do not use them in a 
-  production environment.
+* images are also tagged with the exact JDK version (for example `jdk-8u312-bionic`), but these tags will not receive future updates.
+* tags containing a `-SNAPSHOT` postfix are development artifacts (automated builds from the master branch).
 * tags without any postfix are release artifacts
 
 
@@ -40,11 +47,12 @@ Environment variables:
 
 **Where to get help:**
 
-Channel [#docker](https://xenitengineering.slack.com/app_redirect?channel=docker) on Slack
+Channel [#xeniteu/docker](https://gitter.im/xeniteu/docker) on Gitter
+
 
 **Maintained by:**
 
-Toon Geens <toon.geens@xenit.eu>
+XeniT <docker@xenit.eu>
 
 **Supported Architectures:**
 
@@ -81,7 +89,7 @@ openjdk:<type>-<version>-<os>
 
 There are permutations possible of three parameters in this project.
 
-* **Type**: the Java distribution type, one of `jdk`, `jre` or `server-jre`. At the moment only `jdk` is implemented.
+* **Type**: the Java distribution type, one of `jdk`, `jre` or `server-jre`. At the moment only `jdk` is supported.
 * **Version**: the Java version, for example `8u312`
 * **OS**: the Operating system, for example `ubuntu-18.04`, with optionally some additional variants
 
@@ -91,23 +99,12 @@ Please file an issue if you need a different combination of parameters.
 
 In general, the latest update of the LTS-releases are maintained.
 
-* jdk-7
-    - `jdk-7-ubuntu`
-* jdk-8:
-    - `jdk-8-ubuntu`
-* jdk-11
-    - `jdk-11-ubuntu`
-
 **NOTE**: the Java _update_ (=minor version) is **NOT** maintained. For example: the current Ubuntu JDK 8 image is 
 tagged with `jdk-8-ubuntu-18.04` and has the additional tag `jdk-8u312-ubuntu-18.04` to indicate the Java 8 _update_ version. 
 Once the next update is published, the image tagged `jdk-8-ubuntu-18.04` will be updated, but `jdk-8u312-ubuntu-18.04` 
 will no longer be supported and will not receive OS or Java security patches.
 
-Images are used as base images for building Alfresco. The supported stack for Alfresco is documented at (replace 
-capital X's with the desired version):
-
-* https://www.alfresco.com/sites/www.alfresco.com/files//supported_platforms_for_alfresco_enterprise_X.X.x.pdf for Alfresco <5.2
-* https://docs.alfresco.com/X.X/concepts/supported-platforms-ACS.html for Alfresco >=5.2
+Images are used as base images for Alfresco services.
 
 When the OS reached end-of-life (Alfresco 4 - using Ubuntu 10.04, 12.04), next available LTS version is used. 
 When multiple major Java versions are supported, the higher version is used.
@@ -117,14 +114,18 @@ At the moment, following versions are built:
 
 | Alfresco      | OpenJDk            | Ubuntu                             |
 | ------------- | ------------------ | ---------------------------------- |
-| Alfresco 6.2  | JDK 11u13         | 18.04 - `jdk-11-ubuntu-18.04`  |
-| Alfresco 6.1  | JDK 11u13         | 18.04 - `jdk-11-ubuntu-18.04`  |
-| Alfresco 6.0  | JDK 11u13         | 18.04 - `jdk-11-ubuntu-18.04`  |
-| Alfresco 5.2  | JDK 8u312          | 18.04 - `jdk-8-ubuntu-18.04`   |
+| [Alfresco 6.2]  | JDK 11u13         | 18.04 - `jdk-11-ubuntu-18.04`  |
+| [Alfresco 6.1]  | JDK 11u13         | 18.04 - `jdk-11-ubuntu-18.04`  |
+| [Alfresco 6.0]  | JDK 11u13         | 18.04 - `jdk-11-ubuntu-18.04`  |
+| [Alfresco 5.2]  | JDK 8u312          | 18.04 - `jdk-8-ubuntu-18.04`   |
 | Alfresco 5.1  | JDK 8u312          | 18.04 - `jdk-8-ubuntu-18.04`   |
 | Alfresco 5.0  | JDK 8u312          | 18.04 - `jdk-8-ubuntu-18.04`   |
 | Alfresco 4.2  | JDK 7u211 (Oracle) | 14.04 - `jdk-7-ubuntu-14.04`   |
 
+[Alfresco 6.2]: https://docs.alfresco.com/content-services/6.2/support/
+[Alfresco 6.1]: https://docs.alfresco.com/content-services/6.1/support/
+[Alfresco 6.0]: https://docs.alfresco.com/content-services/6.0/support/
+[Alfresco 5.2]: https://docs.alfresco.com/content-services/5.2/support/
 
 
 ### Operating Systems
