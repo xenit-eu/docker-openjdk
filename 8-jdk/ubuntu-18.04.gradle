@@ -1,6 +1,6 @@
 ext {
     java = [
-            vendor : 'eclipse',
+            vendor : 'adoptium',
             flavor : 'jdk',
             version: temurin[8]
     ]
