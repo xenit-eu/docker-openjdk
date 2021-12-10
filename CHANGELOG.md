@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## 2021-12
-* [2021-12-10] [PR #29](https://github.com/xenit-eu/docker-openjdk/pull/29]) Replaced AdoptOpenJDK with Eclipse Temurin, updating to jdk-8u312-b07 and jdk-11.0.13+08
+* [2021-12-10] [PR #29](https://github.com/xenit-eu/docker-openjdk/pull/29]) Replaced AdoptOpenJDK with Eclipse Temurin and update to `jdk-8u312-b07` and `jdk-11.0.13+08`
+* [2021-12-10] [PR #30](https://github.com/xenit-eu/docker-openjdk/pull/30]) Remove `centos` builds
+
 
 ## 2021-02
 * [2021-02-01] [PR #26](https://github.com/xenit-eu/docker-openjdk/pull/26) Update to jdk-11.0.10+9
