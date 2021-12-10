@@ -9,6 +9,7 @@ OpenJDK Docker Images built and maintained by XeniT
 ## Supported Tags
 
 * `jdk-11-ubuntu-18.04`, `jdk-11-bionic`, `jdk-11`
+* `jdk-11-ubuntu-20.04`, `jdk-11-focal`
 * `jdk-8-ubuntu-18.04`, `jdk-8-bionic`, `jdk-8-ubuntu`, `jdk-8`
 * `jdk-7-ubuntu-14.04`, `jdk-7-trusty`
 
@@ -130,8 +131,8 @@ At the moment, following versions are built:
 
 ### Operating Systems
 
+*  Ubuntu 20.04 LTS - `ubuntu:focal`
 *  Ubuntu 18.04 LTS - `ubuntu:bionic`
-*  Ubuntu 16.04 LTS - `ubuntu:xenial`
 *  Ubuntu 14.04 LTS - `ubuntu:trusty`
 
 ## Initialization
