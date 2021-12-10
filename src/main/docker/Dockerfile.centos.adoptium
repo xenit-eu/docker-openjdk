@@ -8,7 +8,8 @@ ARG JAVA_VERSION_ESUM
 ARG JAVA_VERSION
 ARG JAVA_VERSION_COMPACT
 
-ENV BINARY_URL="https://github.com/AdoptOpenJDK/openjdk${JAVA_VERSION_MAJOR}-binaries/releases/download/jdk${JAVA_VERSION}/OpenJDK${JAVA_VERSION_MAJOR}U-jdk_x64_linux_hotspot_${JAVA_VERSION_COMPACT}.tar.gz"
+ENV BINARY_URL="https://github.com/adoptium/temurin${JAVA_VERSION_MAJOR}-binaries/releases/download/${JAVA_FLAVOR}${JAVA_VERSION}/OpenJDK${JAVA_VERSION_MAJOR}U-jdk_x64_linux_hotspot_${JAVA_VERSION_COMPACT}.tar.gz"
+
 ENV JAVA_HOME=/opt/java/openjdk
 
 COPY ./docker-entrypoint.sh /
