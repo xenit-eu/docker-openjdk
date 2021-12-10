@@ -1,0 +1,13 @@
+ext {
+    java = [
+            vendor : 'adoptium',
+            flavor : 'jdk',
+            version: temurin[11]
+    ]
+    os = [
+            vendor : 'ubuntu',
+            version: '20.04',
+            name   : 'focal'
+    ]
+    extraTags = []
+}
