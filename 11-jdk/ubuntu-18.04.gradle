@@ -1,8 +1,8 @@
 ext {
     java = [
-            vendor : 'adoptopenjdk',
+            vendor : 'eclipse',
             flavor : 'jdk',
-            version: ADOPTOPENJDK[11]
+            version: temurin[11]
     ]
     os = [
             vendor : 'ubuntu',
