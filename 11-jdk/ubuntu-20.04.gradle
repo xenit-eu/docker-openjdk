@@ -6,8 +6,8 @@ ext {
     ]
     os = [
             vendor : 'ubuntu',
-            version: '18.04',
-            name   : 'bionic'
+            version: '20.04',
+            name   : 'focal'
     ]
-    extraTags = ["alfresco-6.0-ubuntu", "alfresco-6.1-ubuntu", "alfresco-6.2-ubuntu"]
+    extraTags = []
 }
